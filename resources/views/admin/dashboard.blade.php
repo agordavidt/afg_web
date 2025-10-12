@@ -57,24 +57,24 @@
     </div>
 
     <div class="col-md-3">
-    <div class="card card-stats card-round">
-        <div class="card-body">
-            <div class="row align-items-center">
-                <div class="col-5">
-                    <div class="icon-big text-center icon-warning bubble-shadow-small">
-                        <i class="fas fa-clock"></i>
+        <div class="card card-stats card-round">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-5">
+                        <div class="icon-big text-center icon-warning bubble-shadow-small">
+                            <i class="fas fa-clock"></i>
+                        </div>
                     </div>
-                </div>
-                <div class="col-7 col-stats">
-                    <div class="numbers">
-                        <p class="card-category">Pending Reviews</p>
-                        <h4 class="card-title">{{ number_format($stats['pending_reviews']) }}</h4>
+                    <div class="col-7 col-stats">
+                        <div class="numbers">
+                            <p class="card-category">Pending Reviews</p>
+                            <h4 class="card-title">{{ number_format($stats['pending_reviews']) }}</h4>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
     <div class="col-md-3">
         <div class="card card-stats card-round">
@@ -97,12 +97,12 @@
     </div>
 </div>
 
-<!-- <div class="row">
+<div class="row">
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
                 <div class="card-head-row">
-                    <div class="card-title">Completed Registrations by Month ({{ $currentYear }})</div>
+                    <div class="card-title">Registration Status Overview</div>
                 </div>
             </div>
             <div class="card-body">
@@ -110,7 +110,7 @@
             </div>
         </div>
     </div>
-</div> -->
+</div>
 @endsection
 
 @push('scripts')
@@ -119,26 +119,24 @@
 document.addEventListener('DOMContentLoaded', function() {
     const ctx = document.getElementById('registrationChart').getContext('2d');
     
-    const chartData = @json(array_values($completedByMonth));
-    const chartLabels = @json(array_keys($completedByMonth));
+    const completedCount = {{ $registrationData['completed'] }};
+    const uncompletedCount = {{ $registrationData['uncompleted'] }};
     
     new Chart(ctx, {
-        type: 'line',
+        type: 'pie',
         data: {
-            labels: chartLabels,
+            labels: ['Completed Registrations', 'Uncompleted Registrations'],
             datasets: [{
-                label: 'Completed Registrations',
-                data: chartData,
-                borderColor: '#1f77b4',
-                backgroundColor: 'rgba(31, 119, 180, 0.1)',
-                borderWidth: 3,
-                fill: true,
-                tension: 0.4,
-                pointBackgroundColor: '#1f77b4',
-                pointBorderColor: '#fff',
-                pointBorderWidth: 2,
-                pointRadius: 6,
-                pointHoverRadius: 8,
+                data: [completedCount, uncompletedCount],
+                backgroundColor: [
+                    'rgba(40, 167, 69, 0.8)',   // Green for completed
+                    'rgba(255, 193, 7, 0.8)'    // Yellow/Orange for uncompleted
+                ],
+                borderColor: [
+                    'rgba(40, 167, 69, 1)',
+                    'rgba(255, 193, 7, 1)'
+                ],
+                borderWidth: 2
             }]
         },
         options: {
@@ -146,28 +144,23 @@ document.addEventListener('DOMContentLoaded', function() {
             maintainAspectRatio: false,
             plugins: {
                 legend: {
-                    display: false
-                }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    ticks: {
-                        stepSize: 1
-                    },
-                    grid: {
-                        color: 'rgba(0,0,0,0.1)'
+                    display: true,
+                    position: 'bottom',
+                    labels: {
+                        padding: 20,
+                        font: {
+                            size: 13
+                        }
                     }
                 },
-                x: {
-                    grid: {
-                        display: false
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            const total = completedCount + uncompletedCount;
+                            const percentage = ((context.parsed / total) * 100).toFixed(1);
+                            return context.label + ': ' + context.parsed + ' students (' + percentage + '%)';
+                        }
                     }
-                }
-            },
-            elements: {
-                point: {
-                    hoverBackgroundColor: '#1f77b4'
                 }
             }
         }

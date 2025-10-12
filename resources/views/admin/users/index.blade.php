@@ -90,7 +90,7 @@
                         <th>Name</th>
                         <th>Phone</th>
                         <th>Email</th>
-                        <th>School</th>
+                        <!-- <th>School</th> -->
                         <th>Payment</th>
                         <th>Application</th>
                         <th>Registration</th>
@@ -104,7 +104,7 @@
                             <td>{{ $user->full_name }}</td>
                             <td>{{ $user->phone_number }}</td>
                             <td>{{ $user->email ?: 'N/A' }}</td>
-                            <td title="{{ $user->school }}">{{ Str::limit($user->school ?: 'N/A', 20) }}</td>
+                            <!-- <td title="{{ $user->school }}">{{ Str::limit($user->school ?: 'N/A', 20) }}</td> -->
                             <td>
                                 @if($user->payment_status == 'paid')
                                     <span class="badge badge-success">Paid</span>
