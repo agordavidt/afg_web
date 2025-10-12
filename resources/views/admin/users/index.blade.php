@@ -94,7 +94,7 @@
                         <th>Payment</th>
                         <th>Application</th>
                         <th>Registration</th>
-                        <th>Created At</th>
+                        <th>Date</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
