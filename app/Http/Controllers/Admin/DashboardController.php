@@ -28,6 +28,14 @@ class DashboardController extends Controller
             'completed_profiles' => User::where('registration_stage', 'completed')->count(),
             'pending_reviews' => $pendingReviewsCount,
             'total_payments' => Payment::where('status', 'success')->sum('amount'),
+            
+            // Additional stats for quick access cards
+            'pending_count' => User::where('registration_stage', '!=', 'completed')->count(),
+            'reviewing_count' => User::where('application_status', 'reviewing')->count(),
+            'accepted_count' => User::where('application_status', 'accepted')->count(),
+            'rejected_count' => User::where('application_status', 'rejected')->count(),
+            'paid_count' => User::where('payment_status', 'paid')->count(),
+            'payment_pending_count' => User::where('payment_status', 'pending')->count(),
         ];
 
         // Get registration status data for chart

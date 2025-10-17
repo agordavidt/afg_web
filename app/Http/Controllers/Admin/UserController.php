@@ -26,6 +26,7 @@ class UserController extends Controller
         $this->smsService = $smsService;
     }
 
+    // All users with advanced filtering
     public function index(Request $request)
     {
         $query = User::with(['payments']);
@@ -79,13 +80,159 @@ class UserController extends Controller
         return view('admin.users.index', compact('users', 'schools'));
     }
 
+    // Pending registrations (not completed)
+    public function pending(Request $request)
+    {
+        $query = User::where('registration_stage', '!=', 'completed');
 
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->where('first_name', 'like', "%{$search}%")
+                    ->orWhere('last_name', 'like', "%{$search}%")
+                    ->orWhere('phone_number', 'like', "%{$search}%");
+            });
+        }
+
+        if ($request->filled('school')) {
+            $query->where('school', 'like', "%{$request->school}%");
+        }
+
+        $users = $query->orderBy('created_at', 'desc')->paginate(15);
+        $schools = User::whereNotNull('school')->distinct()->pluck('school')->sort()->values();
+
+        return view('admin.users.pending', compact('users', 'schools'));
+    }
+
+    // Completed registrations
+    public function completed(Request $request)
+    {
+        $query = User::where('registration_stage', 'completed');
+
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->where('first_name', 'like', "%{$search}%")
+                    ->orWhere('last_name', 'like', "%{$search}%")
+                    ->orWhere('phone_number', 'like', "%{$search}%");
+            });
+        }
+
+        if ($request->filled('school')) {
+            $query->where('school', 'like', "%{$request->school}%");
+        }
+
+        if ($request->filled('application_status')) {
+            $query->where('application_status', $request->application_status);
+        }
+
+        $users = $query->orderBy('created_at', 'desc')->paginate(15);
+        $schools = User::whereNotNull('school')->distinct()->pluck('school')->sort()->values();
+
+        return view('admin.users.completed', compact('users', 'schools'));
+    }
+
+    // Paid students
+    public function paid(Request $request)
+    {
+        $query = User::where('payment_status', 'paid');
+
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->where('first_name', 'like', "%{$search}%")
+                    ->orWhere('last_name', 'like', "%{$search}%")
+                    ->orWhere('phone_number', 'like', "%{$search}%");
+            });
+        }
+
+        if ($request->filled('school')) {
+            $query->where('school', 'like', "%{$request->school}%");
+        }
+
+        $users = $query->orderBy('created_at', 'desc')->paginate(15);
+        $schools = User::whereNotNull('school')->distinct()->pluck('school')->sort()->values();
+
+        return view('admin.users.paid', compact('users', 'schools'));
+    }
+
+    // Payment pending students
+    public function paymentPending(Request $request)
+    {
+        $query = User::where('payment_status', 'pending');
+
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->where('first_name', 'like', "%{$search}%")
+                    ->orWhere('last_name', 'like', "%{$search}%")
+                    ->orWhere('phone_number', 'like', "%{$search}%");
+            });
+        }
+
+        if ($request->filled('school')) {
+            $query->where('school', 'like', "%{$request->school}%");
+        }
+
+        $users = $query->orderBy('created_at', 'desc')->paginate(15);
+        $schools = User::whereNotNull('school')->distinct()->pluck('school')->sort()->values();
+
+        return view('admin.users.payment-pending', compact('users', 'schools'));
+    }
+
+    // Accepted applications
+    public function accepted(Request $request)
+    {
+        $query = User::where('application_status', 'accepted');
+
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->where('first_name', 'like', "%{$search}%")
+                    ->orWhere('last_name', 'like', "%{$search}%")
+                    ->orWhere('phone_number', 'like', "%{$search}%");
+            });
+        }
+
+        if ($request->filled('school')) {
+            $query->where('school', 'like', "%{$request->school}%");
+        }
+
+        $users = $query->orderBy('created_at', 'desc')->paginate(15);
+        $schools = User::whereNotNull('school')->distinct()->pluck('school')->sort()->values();
+
+        return view('admin.users.accepted', compact('users', 'schools'));
+    }
+
+    // Rejected applications
+    public function rejected(Request $request)
+    {
+        $query = User::where('application_status', 'rejected');
+
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->where('first_name', 'like', "%{$search}%")
+                    ->orWhere('last_name', 'like', "%{$search}%")
+                    ->orWhere('phone_number', 'like', "%{$search}%");
+            });
+        }
+
+        if ($request->filled('school')) {
+            $query->where('school', 'like', "%{$request->school}%");
+        }
+
+        $users = $query->orderBy('created_at', 'desc')->paginate(15);
+        $schools = User::whereNotNull('school')->distinct()->pluck('school')->sort()->values();
+
+        return view('admin.users.rejected', compact('users', 'schools'));
+    }
 
     public function show(User $user)
     {
         $user->load(['payments', 'notifications']);
         
-        $smsBalance = ['balance' => 'N/A', 'currency' => 'Credits']; // Placeholder
+        $smsBalance = ['balance' => 'N/A', 'currency' => 'Credits'];
         
         return view('admin.users.show', compact('user', 'smsBalance'));
     }
@@ -113,7 +260,7 @@ class UserController extends Controller
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
                 'email' => $request->email,
-                'phone_number' => $request->phone_number, // Will be cleaned by mutator
+                'phone_number' => $request->phone_number,
                 'school' => $request->school,
                 'registration_stage' => $request->registration_stage,
                 'payment_status' => $request->payment_status,
@@ -132,10 +279,7 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         try {
-            // Delete related payments first
             $user->payments()->delete();
-            
-            // Delete the user
             $user->delete();
 
             return redirect()->route('admin.users.index')
@@ -171,99 +315,85 @@ class UserController extends Controller
         return back()->with('success', 'Application status updated successfully.');
     }
 
- 
-
     public function approvePayment(Request $request, User $user, Payment $payment)
-{
-    // Safety check to ensure an admin is authenticated
-    if (!Auth::guard('admin')->check()) {
-        return back()->with('error', 'Authentication error. Please log in again.');
+    {
+        if (!Auth::guard('admin')->check()) {
+            return back()->with('error', 'Authentication error. Please log in again.');
+        }
+
+        if ($payment->user_id !== $user->id) {
+            return back()->with('error', 'Payment does not belong to this user.');
+        }
+
+        if ($payment->status !== 'submitted') {
+            return back()->with('error', 'Payment cannot be approved as its status is not "submitted".');
+        }
+
+        DB::beginTransaction();
+        try {
+            $approvalNote = $request->input('approval_note');
+            $adminUser = Auth::guard('admin')->user();
+            
+            $payment->status = 'success';
+            $payment->gateway_response = [
+                'approved_by' => $adminUser->full_name,
+                'approved_at' => now(),
+                'approval_note' => $approvalNote,
+            ];
+            $payment->save();
+
+            $user->payment_status = 'paid';
+            $user->save();
+
+            DB::commit();
+            return back()->with('success', 'Payment approved successfully and user status updated to "paid".');
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->with('error', 'Failed to approve payment: ' . $e->getMessage());
+        }
     }
 
-    // Check if the payment belongs to the user
-    if ($payment->user_id !== $user->id) {
-        return back()->with('error', 'Payment does not belong to this user.');
-    }
+    public function rejectPayment(Request $request, User $user, Payment $payment)
+    {
+        if (!Auth::guard('admin')->check()) {
+            return back()->with('error', 'Authentication error. Please log in again.');
+        }
 
-    // Check if the payment is in the 'submitted' status
-    if ($payment->status !== 'submitted') {
-        return back()->with('error', 'Payment cannot be approved as its status is not "submitted".');
-    }
+        $request->validate([
+            'rejection_reason' => 'required|string|max:255',
+        ]);
 
-    DB::beginTransaction();
-    try {
-        $approvalNote = $request->input('approval_note');
+        if ($payment->user_id !== $user->id) {
+            return back()->with('error', 'Payment does not belong to this user.');
+        }
         
-        // Get the authenticated user
-        $adminUser = Auth::guard('admin')->user();
-        
-        // Update the payment record
-        $payment->status = 'success';
-        $payment->gateway_response = [
-            'approved_by' => $adminUser->full_name,
-            'approved_at' => now(),
-            'approval_note' => $approvalNote,
-        ];
-        $payment->save();
+        if ($payment->status !== 'submitted') {
+            return back()->with('error', 'Payment cannot be rejected as its status is not "submitted".');
+        }
 
-        // Update the user's payment status to 'paid'
-        $user->payment_status = 'paid';
-        $user->save();
+        DB::beginTransaction();
+        try {
+            $adminUser = Auth::guard('admin')->user();
 
-        DB::commit();
+            $payment->status = 'rejected';
+            $payment->gateway_response = [
+                'rejected_by' => $adminUser->full_name,
+                'rejected_at' => now(),
+                'rejection_reason' => $request->input('rejection_reason'),
+            ];
+            $payment->save();
 
-        return back()->with('success', 'Payment approved successfully and user status updated to "paid".');
+            DB::commit();
+            return back()->with('success', 'Payment rejected successfully.');
 
-    } catch (\Exception $e) {
-        DB::rollBack();
-        return back()->with('error', 'Failed to approve payment: ' . $e->getMessage());
-    }
-}
-
-  public function rejectPayment(Request $request, User $user, Payment $payment)
-{
-    // Safety check to ensure an admin is authenticated
-    if (!Auth::guard('admin')->check()) {
-        return back()->with('error', 'Authentication error. Please log in again.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->with('error', 'Failed to reject payment: ' . $e->getMessage());
+        }
     }
 
-    $request->validate([
-        'rejection_reason' => 'required|string|max:255',
-    ]);
-
-    // Check if the payment belongs to the user
-    if ($payment->user_id !== $user->id) {
-        return back()->with('error', 'Payment does not belong to this user.');
-    }
-    
-    // Check if the payment is in the 'submitted' status
-    if ($payment->status !== 'submitted') {
-        return back()->with('error', 'Payment cannot be rejected as its status is not "submitted".');
-    }
-
-    DB::beginTransaction();
-    try {
-        $adminUser = Auth::guard('admin')->user();
-
-        // Update the payment record
-        $payment->status = 'rejected';
-        $payment->gateway_response = [
-            'rejected_by' => $adminUser->full_name,
-            'rejected_at' => now(),
-            'rejection_reason' => $request->input('rejection_reason'),
-        ];
-        $payment->save();
-
-        DB::commit();
-        return back()->with('success', 'Payment rejected successfully.');
-
-    } catch (\Exception $e) {
-        DB::rollBack();
-        return back()->with('error', 'Failed to reject payment: ' . $e->getMessage());
-    }
-}
-
-  public function sendSms(Request $request, User $user)
+    public function sendSms(Request $request, User $user)
     {
         $request->validate([
             'message' => 'required|string|max:160'
@@ -273,7 +403,6 @@ class UserController extends Controller
             return back()->with('error', 'User does not have a valid phone number.');
         }
 
-        // The try...catch block is simplified since the NotificationService will handle internal exceptions.
         $result = $this->notificationService->sendCustomSms($user, $request->message);
 
         if ($result['success']) {
@@ -283,19 +412,17 @@ class UserController extends Controller
         }
     }
 
-
     public function bulkSms(Request $request)
     {
         $request->validate([
             'message' => 'required|string|max:160',
             'recipients' => 'required|in:all,paid,pending,accepted,rejected,with_phone',
             'school_filter' => 'nullable|string',
-            'created_since' => 'nullable|date',  // New validation for date filter
+            'created_since' => 'nullable|date',
         ]);
 
         $query = User::query();
 
-        // Apply recipient filters (ensure this logic is complete and correct in your file)
         switch ($request->recipients) {
             case 'paid':
                 $query->where('payment_status', 'paid');
@@ -310,12 +437,10 @@ class UserController extends Controller
                 $query->where('application_status', 'rejected');
                 break;
             case 'with_phone':
-                // Use the scope to filter down to users with a phone number set
                 $query->withValidPhone(); 
                 break;
             case 'all':
             default:
-                // For 'all' we still need to filter for valid numbers to prevent early errors
                 $query->withValidPhone();
                 break;
         }
@@ -324,30 +449,16 @@ class UserController extends Controller
             $query->where('school', 'like', "%{$request->school_filter}%");
         }
 
-        // Apply created_since filter (new)
         if ($request->filled('created_since')) {
             $query->createdAfter($request->created_since);
         }
 
-        // Retrieve the users. We need the models so the Notification Service can call notify() on them.
-        // NOTE: The model-based filtering for hasValidPhoneNumber() is now done implicitly by
-        // the NotificationService loop, but to prevent querying massive datasets, 
-        // it's better to use the scope below if you didn't in the switch.
-        
-        // Ensure all users fetched have at least a non-empty phone number field.
         if ($request->recipients !== 'with_phone' && $request->recipients !== 'all') {
-            // Apply the generic phone filter if not already applied
             $query->withValidPhone();
         }
         
-        // Retrieve users as Eloquent Collections/Models
         $users = $query->get();
-
-        // Secondary Model-based Validation (if your scope isn't strict enough)
-        // Filter to users with *valid* phone numbers for SMS (using the model method)
-        // This is optional if your withValidPhone scope is strict, but ensures cleaner data
         $users = $users->filter(fn ($user) => $user->hasValidPhoneNumber());
-
 
         $totalAttempted = $users->count();
         
@@ -355,10 +466,7 @@ class UserController extends Controller
             return back()->with('error', 'No users match the selected criteria or have valid phone numbers.');
         }
 
-        // Call the service which now handles individual sending and counting
-        // Pass the collection of valid User models
         $result = $this->notificationService->sendBulkSms($users->all(), $request->message); 
-        // Result structure: ['success', 'message', 'sent_count', 'failed_count', 'total']
 
         $sent = $result['sent_count'] ?? 0;
         $failed = $result['failed_count'] ?? 0;
@@ -376,6 +484,7 @@ class UserController extends Controller
 
         return back()->with($type, $message);
     }
+
     public function smsSettings()
     {
         $balance = ['balance' => 'N/A', 'currency' => 'Credits'];

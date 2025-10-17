@@ -14,9 +14,9 @@ Route::get('/', function () {
     return view('landing');
 })->name('landing');
 
-
-
-Route::get('donation', function() { return view('donation');})->name('donation');
+Route::get('donation', function() { 
+    return view('donation');
+})->name('donation');
 
 // Admin Authentication Routes
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -29,8 +29,16 @@ Route::prefix('admin')->name('admin.')->group(function () {
 Route::prefix('admin')->name('admin.')->middleware(['admin.auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     
-    // User Management - Full CRUD
+    // User Management - Categorized Views
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
+    Route::get('/users/pending', [UserController::class, 'pending'])->name('users.pending');
+    Route::get('/users/completed', [UserController::class, 'completed'])->name('users.completed');
+    Route::get('/users/paid', [UserController::class, 'paid'])->name('users.paid');
+    Route::get('/users/payment-pending', [UserController::class, 'paymentPending'])->name('users.payment-pending');
+    Route::get('/users/accepted', [UserController::class, 'accepted'])->name('users.accepted');
+    Route::get('/users/rejected', [UserController::class, 'rejected'])->name('users.rejected');
+    
+    // Individual User Management
     Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show');
     Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
     Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
@@ -74,4 +82,3 @@ Route::prefix('student')->name('student.')->group(function () {
     
     Route::get('/status', [RegistrationController::class, 'status'])->name('status');
 });
-
