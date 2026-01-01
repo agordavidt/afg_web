@@ -528,6 +528,21 @@
         .footer-link:active {
             color: var(--color-primary);
         }
+        /* New styles for pronounced links and benefits section */
+        .pronounced-links {
+            text-align: center;
+            padding: 4.8rem 0;
+            background-color: #e6f3f4;
+        }
+        .pronounced-links .btn--full {
+            font-size: 2.2rem;
+            padding: 2rem 4rem;
+            margin: 1.6rem;
+        }
+        .section-benefits {
+            padding: 9.6rem 0;
+            background-color: #fff;
+        }
         /* Responsive Design */
         @media (max-width: 75em) {
             .container {
@@ -567,6 +582,11 @@
             .offer-attribute,
             .cta-text {
                 font-size: 1.6rem;
+            }
+            .pronounced-links .btn--full {
+                display: block;
+                width: 80%;
+                margin: 1.6rem auto;
             }
         }
         @media (max-width: 59em) {
@@ -792,6 +812,57 @@
                 </div>
             </div>
         </section>
+
+        <!-- New Pronounced Links Section -->
+        <section class="pronounced-links">
+            <div class="container center-text">
+                <a href="https://chat.whatsapp.com/YourWhatsAppGroupLinkHere" target="_blank" class="btn btn--full">
+                    <ion-icon name="logo-whatsapp" style="font-size: 2.8rem; vertical-align: middle; margin-right: 1rem;"></ion-icon>
+                    Join Our WhatsApp Community for Updates & Support
+                </a>
+                <a href="https://www.youtube.com/@academicfunding" target="_blank" class="btn btn--full">
+                    <ion-icon name="logo-youtube" style="font-size: 2.8rem; vertical-align: middle; margin-right: 1rem;"></ion-icon>
+                    Watch Tutorials & Success Stories on YouTube
+                </a>
+            </div>
+        </section>
+
+        <!-- New Benefits Section -->
+        <section class="section-benefits">
+            <div class="container center-text">
+                <span class="subheading">Membership Benefits</span>
+                <h2 class="heading-secondary">Why You Must Register with Academic Funding</h2>
+            </div>
+            <div class="container">
+                <ul class="list" style="max-width: 80rem; margin: 0 auto;">
+                    <li class="list-item">
+                        <ion-icon class="list-icon" name="school-outline"></ion-icon>
+                        <span>Full Entrepreneurship trainings</span>
+                    </li>
+                    <li class="list-item">
+                        <ion-icon class="list-icon" name="briefcase-outline"></ion-icon>
+                        <span>Workplace trainings</span>
+                    </li>
+                    <li class="list-item">
+                        <ion-icon class="list-icon" name="notifications-outline"></ion-icon>
+                        <span>Daily update on jobs, grants, internships and fellowships</span>
+                    </li>
+                    <li class="list-item">
+                        <ion-icon class="list-icon" name="hand-right-outline"></ion-icon>
+                        <span>Direct membership and guide for any application</span>
+                    </li>
+                    <li class="list-item">
+                        <ion-icon class="list-icon" name="globe-outline"></ion-icon>
+                        <span>Access vocational training from institutions all over the world</span>
+                    </li>
+                    <li class="list-item">
+                        <ion-icon class="list-icon" name="ribbon-outline"></ion-icon>
+                        <span>Receive entrepreneurship and workplace training certificate that is recognized</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
         <section class="section-cta" id="cta">
             <div class="container">
                 <div class="cta">
