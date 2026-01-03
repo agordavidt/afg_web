@@ -21,48 +21,52 @@
             --color-secondary: #178ca4;
             --color-dark: #072a40;
         }
+
         * {
             padding: 0;
             margin: 0;
             box-sizing: border-box;
         }
+
         html {
             font-size: 62.5%;
             overflow-x: hidden;
+            scroll-behavior: smooth;
         }
+
         body {
             font-family: "Rubik", sans-serif;
-            line-height: 1;
+            line-height: 1.6;
             font-weight: 400;
             color: var(--color-dark);
             overflow-x: hidden;
             background-color: var(--color-light-background);
         }
+
         .container {
             max-width: 120rem;
             padding: 0 3.2rem;
             margin: 0 auto;
         }
+
         .grid {
             display: grid;
             column-gap: 6.4rem;
-            row-gap: 9.6rem;
+            row-gap: 6.4rem;
         }
-        .grid:not(:last-child) {
-            margin-bottom: 9.6rem;
-        }
+
         .grid--2-cols {
             grid-template-columns: repeat(2, 1fr);
         }
+
         .grid--3-cols {
             grid-template-columns: repeat(3, 1fr);
         }
-        .grid--4-cols {
-            grid-template-columns: repeat(4, 1fr);
-        }
+
         .grid--center-v {
             align-items: center;
         }
+
         .heading-primary,
         .heading-secondary,
         .heading-tertiary {
@@ -70,21 +74,25 @@
             color: var(--color-dark);
             letter-spacing: -0.5px;
         }
+
         .heading-primary {
             font-size: 5.2rem;
             line-height: 1.05;
             margin-bottom: 3.2rem;
         }
+
         .heading-secondary {
             font-size: 4.4rem;
             line-height: 1.2;
-            margin-bottom: 9.6rem;
+            margin-bottom: 4.8rem;
         }
+
         .heading-tertiary {
             font-size: 3rem;
             line-height: 1.2;
             margin-bottom: 3.2rem;
         }
+
         .subheading {
             display: block;
             font-size: 1.6rem;
@@ -94,96 +102,54 @@
             margin-bottom: 1.6rem;
             letter-spacing: 0.75px;
         }
+
         .btn,
         .btn:link,
         .btn:visited {
             display: inline-block;
             text-decoration: none;
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: 600;
-            padding: 1.6rem 3.2rem;
+            padding: 1.4rem 2.8rem;
             border-radius: 9px;
             border: none;
             cursor: pointer;
             font-family: inherit;
             transition: all 0.3s;
         }
+
         .btn--full:link,
         .btn--full:visited {
             background-color: var(--color-primary);
             color: #fff;
         }
+
         .btn--full:hover,
         .btn--full:active {
             background-color: var(--color-secondary);
         }
+
         .btn--outline:link,
         .btn--outline:visited {
             background-color: #fff;
             color: var(--color-dark);
+            border: 1px solid #ddd;
         }
+
         .btn--outline:hover,
         .btn--outline:active {
             background-color: var(--color-light-background);
             box-shadow: inset 0 0 0 3px #fff;
         }
-        .btn--form {
-            background-color: var(--color-dark);
-            color: var(--color-light-background);
-            align-self: end;
-            padding: 1.2rem;
-        }
-        .btn--form:hover {
-            background-color: #fff;
-            color: var(--color-dark);
-        }
-        .link:link,
-        .link:visited {
-            color: var(--color-primary);
-            text-decoration: none;
-            border-bottom: 1px solid currentColor;
-            padding-bottom: 2px;
-            transition: all 0.3s;
-        }
-        .link:hover,
-        .link:active {
-            color: var(--color-secondary);
-            border-bottom: 1px solid transparent;
-        }
-        .list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 1.6rem;
-        }
-        .list-item {
-            font-size: 1.8rem;
-            display: flex;
-            align-items: center;
-            gap: 1.6rem;
-            line-height: 1.2;
-        }
-        .list-icon {
-            width: 3rem;
-            height: 3rem;
-            color: var(--color-primary);
-        }
-        *:focus {
-            outline: none;
-            box-shadow: 0 0 0 0.8rem rgba(24, 183, 190, 0.5);
-        }
-        .margin-right-sm {
-            margin-right: 1.6rem !important;
-        }
-        .margin-bottom-md {
-            margin-bottom: 4.8rem !important;
-        }
+
         .center-text {
             text-align: center;
         }
+
         strong {
-            font-weight: 500;
+            font-weight: 600;
         }
+
         .header {
             display: flex;
             justify-content: space-between;
@@ -192,74 +158,92 @@
             height: 9.6rem;
             padding: 0 4.8rem;
             position: relative;
+            z-index: 100;
         }
+
         .logo {
             height: clamp(2.8rem, 4vw, 3.2rem);
         }
+
         .main-nav-list {
             list-style: none;
             display: flex;
             align-items: center;
-            gap: 4.8rem;
+            gap: 3.2rem;
         }
+
         .main-nav-link:link,
         .main-nav-link:visited {
             display: inline-block;
             text-decoration: none;
             color: var(--color-dark);
             font-weight: 500;
-            font-size: 1.8rem;
+            font-size: 1.7rem;
             transition: all 0.3s;
         }
+
         .main-nav-link:hover,
         .main-nav-link:active {
             color: var(--color-secondary);
         }
+
         .main-nav-link.nav-cta:link,
         .main-nav-link.nav-cta:visited {
-            padding: 1.2rem 2.4rem;
+            padding: 1rem 2rem;
             border-radius: 9px;
             color: #fff;
             background-color: var(--color-primary);
         }
+
         .main-nav-link.nav-cta:hover,
         .main-nav-link.nav-cta:active {
             background-color: var(--color-secondary);
         }
+
         .btn-mobile-nav {
             border: none;
             background: none;
             cursor: pointer;
             display: none;
         }
+
         .icon-mobile-nav {
-            height: 4.8rem;
-            width: 4.8rem;
+            height: 4rem;
+            width: 4rem;
             color: var(--color-dark);
         }
+
         .icon-mobile-nav[name="close-outline"] {
             display: none;
         }
+
         .sticky .header {
             position: fixed;
             top: 0;
-            bottom: 0;
             width: 100%;
             height: 8rem;
-            padding-top: 0;
-            padding-bottom: 0;
+            padding: 0 2.4rem;
             background-color: rgba(255, 255, 255, 0.97);
-            z-index: 999;
             box-shadow: 0 1.2rem 3.2rem rgba(0, 0, 0, 0.03);
+            z-index: 999;
         }
+
         .sticky .section-hero {
             margin-top: 9.6rem;
         }
+
         .section-hero {
             background: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop') no-repeat center center/cover;
             position: relative;
-            padding: 4.8rem 0 9.6rem 0;
+            padding: 6.4rem 0;
+            animation: fadeIn 1s ease-in-out;
         }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
         .hero-overlay {
             background-color: rgba(7, 42, 64, 0.7);
             position: absolute;
@@ -268,29 +252,41 @@
             width: 100%;
             height: 100%;
         }
+
         .hero {
             max-width: 130rem;
             margin: 0 auto;
             padding: 0 3.2rem;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 9.6rem;
+            gap: 6.4rem;
             align-items: center;
             position: relative;
             z-index: 1;
         }
+
         .hero-description {
-            font-size: 2rem;
+            font-size: 1.9rem;
             line-height: 1.6;
-            margin-bottom: 4.8rem;
+            margin-bottom: 3.2rem;
             color: #fff;
         }
+
         .hero-img {
             width: 100%;
+            border-radius: 12px;
+            transform: scale(1.02);
+            transition: transform 0.5s;
         }
+
+        .hero-img:hover {
+            transform: scale(1.05);
+        }
+
         .section-featured {
-            padding: 4.8rem 0 3.2rem 0;
+            padding: 3.2rem 0;
         }
+
         .heading-featured-in {
             font-size: 1.4rem;
             text-transform: uppercase;
@@ -300,128 +296,179 @@
             margin-bottom: 2.4rem;
             color: #888;
         }
+
         .logos {
             display: flex;
-            justify-content: space-around;
+            justify-content: center;
+            align-items: center;
+            gap: 4rem;
+            flex-wrap: wrap;
         }
+
         .logos img {
             height: 3.2rem;
             filter: brightness(0);
             opacity: 50%;
+            transition: all 0.3s;
         }
-        .section-how {
+
+        .logos img:hover {
+            opacity: 100%;
+            filter: brightness(1);
+        }
+
+        /* Alternating section backgrounds */
+        .section-about {
+            padding: 8rem 0;
+            background-color: #fff; /* White */
+        }
+
+        .section-benefits {
             padding: 9.6rem 0;
+            background-color: var(--color-light-background); /* Light beige */
         }
-        .step-number {
-            font-size: 8.6rem;
-            font-weight: 600;
-            color: #bab9b9;
-            margin-bottom: 1.2rem;
+
+        .section-cta {
+            padding: 6.4rem 0;
+            background-color: #fff; /* Keeps contrast before dark footer */
         }
-        .step-description {
-            font-size: 1.8rem;
+
+        /* About Us - Equal height columns */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6.4rem;
+            align-items: stretch; /* Key: makes both columns same height */
+        }
+
+        .about-text-box {
+            font-size: 1.7rem;
             line-height: 1.8;
+            color: #555;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
-        .step-img-box {
-            position: relative;
+
+        .about-img-container {
+            display: flex;
+            align-items: stretch;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .about-img:hover {
+            transform: scale(1.05);
+        }
+
+        .benefit-card {
+            background: white;
+            padding: 3.2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .benefit-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .benefit-icon {
+            width: 8rem;
+            height: 8rem;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
-            border-radius: 11px;
+            margin: 0 auto 2rem;
         }
-        .step-img-box::before,
-        .step-img-box::after {
-            content: "";
-            display: block;
-            border-radius: 50%;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-        .step-img-box::before {
-            width: 60%;
-            padding-bottom: 60%;
-            background-color: var(--color-light-background);
-            z-index: -2;
-        }
-        .step-img-box::after {
-            width: 45%;
-            padding-bottom: 45%;
-            background-color: #e6f3f4;
-            z-index: -1;
-        }
-        .step-img {
-            width: 100%;
-            max-width: 50%;
-            object-fit: cover;
-            border-radius: 11px;
-        }
-        .section-offers {
-            padding: 9.6rem 0;
-        }
-        .offer {
-            box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.075);
-            border-radius: 11px;
-            overflow: hidden;
-            transition: all 0.4s;
-        }
-        .offer:hover {
-            transform: translateY(-1.2rem);
-            box-shadow: 0 3.2rem 6.4rem rgba(0, 0, 0, 0.06);
-        }
-        .offer-content {
-            padding: 3.2rem 4.8rem 4.8rem 4.8rem;
-        }
-        .offer-title {
-            font-size: 2.4rem;
+
+        .benefit-title {
+            font-size: 2.2rem;
+            margin-bottom: 1.6rem;
             color: var(--color-dark);
-            font-weight: 600;
-            margin-bottom: 3.2rem;
         }
-        .offer-attributes {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
+
+        .benefit-text {
+            font-size: 1.6rem;
+            line-height: 1.6;
+            color: #555;
         }
-        .offer-attribute {
-            font-size: 1.8rem;
-            display: flex;
-            align-items: center;
-            gap: 1.6rem;
-        }
-        .offer-icon {
-            height: 2.4rem;
-            width: 2.4rem;
-            color: var(--color-primary);
-        }
-        .section-cta {
-            padding: 4.8rem 0 12.8rem;
-        }
+
         .cta {
             display: grid;
-            grid-template-columns: 2fr 1fr;
-            box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.15);
+            grid-template-columns: 1fr 1fr;
+            box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.1);
             border-radius: 11px;
             background-image: linear-gradient(to right bottom, var(--color-primary), var(--color-secondary));
             overflow: hidden;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s;
         }
+
+        .cta.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         .cta-text-box {
-            padding: 4.8rem 6.4rem 6.4rem 6.4rem;
+            padding: 4.8rem;
             color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
+
         .cta .heading-secondary {
             color: inherit;
+            margin-bottom: 2.4rem;
+            font-size: 3.6rem;
+        }
+
+        .cta-text {
+            font-size: 1.7rem;
+            line-height: 1.6;
             margin-bottom: 3.2rem;
         }
-        .cta-text {
-            font-size: 1.8rem;
-            line-height: 1.8;
-            margin-bottom: 4.8rem;
+
+        .social-icons-container {
+            display: flex;
+            gap: 1.6rem; /* Reduced from 2.4rem */
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 3.2rem;
         }
+
+        .social-icon-large {
+            width: 7rem;
+            height: 7rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .social-icon-large:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
         .cta-img-box {
+            min-height: 30rem;
             background-image: linear-gradient(
                 to right bottom,
                 rgba(24, 183, 190, 0.35),
@@ -431,171 +478,100 @@
             background-size: cover;
             background-position: center;
         }
-        .cta-form {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            column-gap: 3.2rem;
-            row-gap: 2.4rem;
-        }
-        .cta-form label {
-            display: block;
-            font-size: 1.6rem;
-            font-weight: 500;
-            margin-bottom: 1.2rem;
-        }
-        .cta-form input,
-        .cta-form select {
+
+        .cta-img-box img {
             width: 100%;
-            padding: 1.2rem;
-            font-size: 1.8rem;
-            font-family: inherit;
-            color: inherit;
-            border: none;
-            background-color: var(--color-light-background);
-            border-radius: 9px;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.9;
+            display: block;
         }
-        .cta-form input::placeholder {
-            color: #aaa;
-        }
-        .cta *:focus {
-            outline: none;
-            box-shadow: 0 0 0 0.8rem rgba(249, 247, 240, 0.5);
-        }
+
         .footer {
-            padding: 12.8rem 0;
+            padding: 4.8rem 0;
             border-top: 1px solid #eee;
             background-color: var(--color-dark);
             color: #fff;
         }
-        .grid--footer {
-            grid-template-columns: 1.5fr 1.5fr 1fr 1fr 1fr;
-        }
-        .logo-col {
-            display: flex;
-            flex-direction: column;
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
             align-items: center;
-            text-align: center;
         }
-        .footer-logo {
-            display: block;
-            margin-bottom: 3.2rem;
+
+        .footer-logo img {
+            height: 4rem;
         }
-        .social-links {
-            list-style: none;
-            display: flex;
-            gap: 2.4rem;
-        }
-        .social-icon {
-            height: 2.4rem;
-            width: 2.4rem;
-        }
-        .copyright {
-            font-size: 1.4rem;
-            line-height: 1.6;
-            color: #767676;
-            margin-top: auto;
-            text-align: center;
-        }
-        .footer-heading {
-            font-size: 1.8rem;
-            font-weight: 500;
-            margin-bottom: 4rem;
-        }
+
         .contacts {
             font-style: normal;
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             line-height: 1.6;
-            text-align: center;
         }
-        .address {
-            margin-bottom: 2.4rem;
-        }
-        .footer-nav {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 2.4rem;
-        }
-        .footer-link:link,
-        .footer-link:visited {
+
+        .contacts a {
+            color: #aaa;
             text-decoration: none;
-            font-size: 1.6rem;
-            color: #767676;
-            transition: all 0.3s;
+            transition: color 0.3s;
         }
-        .footer-link:hover,
-        .footer-link:active {
+
+        .contacts a:hover {
             color: var(--color-primary);
         }
-        /* New styles for pronounced links and benefits section */
-        .pronounced-links {
+
+        .copyright {
+            font-size: 1.4rem;
+            color: #999;
             text-align: center;
-            padding: 4.8rem 0;
-            background-color: #e6f3f4;
+            margin-top: 2.4rem;
+            padding-top: 2.4rem;
+            border-top: 1px solid #444;
         }
-        .pronounced-links .btn--full {
-            font-size: 2.2rem;
-            padding: 2rem 4rem;
-            margin: 1.6rem;
-        }
-        .section-benefits {
-            padding: 9.6rem 0;
-            background-color: #fff;
-        }
-        /* Responsive Design */
+
+        /* Responsive */
         @media (max-width: 75em) {
             .container {
-                max-width: 96rem;
                 padding: 0 2.4rem;
             }
+
             .grid--2-cols,
             .grid--3-cols,
-            .grid--4-cols {
+            .about-grid {
                 grid-template-columns: 1fr;
+                row-gap: 4.8rem;
             }
+
             .hero {
                 grid-template-columns: 1fr;
                 text-align: center;
-                gap: 4.8rem;
+                gap: 3.2rem;
             }
+
             .cta {
                 grid-template-columns: 1fr;
             }
-            .cta-text-box {
-                padding: 3.2rem 4rem;
-            }
+
             .cta-img-box {
-                min-height: 20rem;
+                min-height: 40rem;
             }
-            .heading-primary {
-                font-size: 4.4rem;
-            }
-            .heading-secondary {
-                font-size: 3.6rem;
-            }
-            .heading-tertiary {
-                font-size: 2.4rem;
-            }
-            .hero-description,
-            .step-description,
-            .offer-attribute,
-            .cta-text {
-                font-size: 1.6rem;
-            }
-            .pronounced-links .btn--full {
-                display: block;
-                width: 80%;
-                margin: 1.6rem auto;
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
             }
         }
+
         @media (max-width: 59em) {
             html {
                 font-size: 56.25%;
             }
+
             .header {
                 padding: 0 2.4rem;
             }
+
             .main-nav {
                 display: none;
                 position: absolute;
@@ -604,51 +580,65 @@
                 width: 100%;
                 background-color: var(--color-light-background);
                 padding: 2.4rem;
-                z-index: 1000;
             }
+
             .main-nav.active {
                 display: block;
             }
+
             .main-nav-list {
                 flex-direction: column;
                 gap: 2.4rem;
                 align-items: center;
             }
+
             .btn-mobile-nav {
                 display: block;
             }
+
             .btn-mobile-nav[aria-expanded="true"] .icon-mobile-nav[name="menu-outline"] {
                 display: none;
             }
+
             .btn-mobile-nav[aria-expanded="true"] .icon-mobile-nav[name="close-outline"] {
                 display: block;
             }
-            .section-hero {
-                padding: 3.2rem 0 6.4rem 0;
+
+            .heading-primary {
+                font-size: 4rem;
             }
-            .step-img-box {
-                display: none;
+
+            .heading-secondary {
+                font-size: 3.2rem;
             }
         }
+
         @media (max-width: 34em) {
             html {
                 font-size: 50%;
             }
+
             .container {
                 padding: 0 1.6rem;
             }
-            .section-how,
-            .section-offers,
+
+            .section-hero,
+            .section-about,
+            .section-benefits,
             .section-cta {
-                padding: 6.4rem 0;
+                padding: 4.8rem 0;
             }
+
             .logos {
-                flex-direction: column;
-                align-items: center;
                 gap: 2rem;
             }
+
             .logos img {
                 height: 2.8rem;
+            }
+
+            .social-icons-container {
+                gap: 1.2rem;
             }
         }
     </style>
@@ -661,7 +651,7 @@
         <nav class="main-nav">
             <ul class="main-nav-list">
                 <li><a class="main-nav-link" href="#about">About Us</a></li>
-                <li><a class="main-nav-link" href="{{ route('donation') }}">Parner with us</a></li>           
+                <li><a class="main-nav-link" href="{{ route('donation') }}">Partner with us</a></li>           
                 <li><a class="main-nav-link nav-cta" href="{{ route('student.register') }}">Complete Registration</a></li>
             </ul>
         </nav>
@@ -670,6 +660,7 @@
             <ion-icon class="icon-mobile-nav" name="close-outline"></ion-icon>
         </button>
     </header>
+
     <main>
         <section class="section-hero">
             <div class="hero-overlay"></div>
@@ -684,182 +675,75 @@
                 </div>
             </div>
         </section>
+
         <section class="section-featured">
             <div class="container">
                 <h2 class="heading-featured-in"></h2>
                 <div class="logos">
-                    <!-- <img src="{{ asset('img/logos/university-logo.png') }}" alt="University logo" />
-                    <img src="{{ asset('img/logos/business-insider.png') }}" alt="Business Insider logo" />
-                    <img src="{{ asset('img/logos/techcrunch.png') }}" alt="Techcrunch logo" />
-                    <img src="{{ asset('img/logos/forbes.png') }}" alt="Forbes logo" /> -->
+                    <!-- Logos can be added here later -->
                 </div>
             </div>
         </section>
+
         <section class="section-about" id="about">
-            <div class="container">
+            <div class="container center-text">
                 <span class="subheading">About Us</span>
                 <h2 class="heading-secondary">Empowering Students to Become Entrepreneurs</h2>
             </div>
-            <div class="container grid grid--2-cols grid--center-v">
-                <div class="step-text-box">
-                    <p class="step-description">
-                        The Student-to-CEO Initiative, powered by the Academic Funding Gateway Network, is committed to bridging the gap between education and entrepreneurship. We equip Nigerian students with the financial support, incubation, and learning tools they need to start and grow businesses—while still in school.
-                    </p>
-                </div>
-                <div class="step-img-box">
-                    <img src="{{ asset('assets/img/students_working_business_idea.jpg') }}" class="step-img" alt="Students working on business ideas" />
-                </div>
-            </div>
-        </section>
-        <section class="section-how" id="how">
             <div class="container">
-                <span class="subheading">How It Works</span>
-                <h2 class="heading-secondary">Your Path to Entrepreneurship in 4 Simple Steps</h2>
-            </div>
-            <div class="container grid grid--2-cols grid--center-v">
-                <div class="step-text-box">
-                    <p class="step-number">01</p>
-                    <h3 class="heading-tertiary">Apply Offline</h3>
-                    <p class="step-description">
-                        Begin your journey by submitting an offline application through your university or designated centers.
-                    </p>
-                </div>
-                <div class="step-img-box">
-                    <img src="{{ asset('assets/img/registration.jpg') }}" class="step-img" alt="Offline application process" />
-                </div>
-                <div class="step-img-box">
-                    <img src="{{ asset('assets/img/online_screen.jpg') }}" class="step-img" alt="Online registration completion screen" />
-                </div>
-                <div class="step-text-box">
-                    <p class="step-number">02</p>
-                    <h3 class="heading-tertiary">Complete Online Registration</h3>
-                    <p class="step-description">
-                        Once your details are imported by our admin team, log in to the platform to complete your registration and verify your profile.
-                    </p>
-                </div>
-                <div class="step-text-box">
-                    <p class="step-number">03</p>
-                    <h3 class="heading-tertiary">Access Grants & Resources</h3>
-                    <p class="step-description">
-                        Receive financial support and business toolkits to fuel your startup journey.
-                    </p>
-                </div>
-                <div class="step-img-box">
-                    <img src="{{ asset('assets/img/girl.jpg') }}" class="step-img" alt="Grants access screen" />
-                </div>
-                <div class="step-img-box">
-                    <img src="{{ asset('assets/img/mentorship_1.jpg') }}" class="step-img" alt="Mentorship program screen" />
-                </div>
-                <div class="step-text-box">
-                    <p class="step-number">04</p>
-                    <h3 class="heading-tertiary">Join Training & Launch Your Business</h3>
-                    <p class="step-description">
-                        Participate in six months of skill-based training and mentorship, then launch and grow your business with ongoing support.
-                    </p>
-                </div>
-            </div>
-        </section>
-        <section class="section-offers" id="offers">
-            <div class="container center-text">
-                <span class="subheading">What We Offer</span>
-                <h2 class="heading-secondary">Tools for Your Entrepreneurial Journey</h2>
-            </div>
-            <div class="container grid grid--3-cols margin-bottom-md">
-                <div class="offer">
-                    <div class="offer-content">
-                        <p class="offer-title">Business Grants</p>
-                        <ul class="offer-attributes">
-                            <li class="offer-attribute">
-                                <ion-icon class="offer-icon" name="cash-outline"></ion-icon>
-                                <span>Financial support for startups</span>
-                            </li>
-                            <li class="offer-attribute">
-                                <ion-icon class="offer-icon" name="rocket-outline"></ion-icon>
-                                <span>Kickstart innovative ventures</span>
-                            </li>
-                        </ul>
+                <div class="about-grid">
+                    <div class="about-text-box">
+                        <p class="about-description">
+                            The Student-to-CEO Initiative, powered by the Academic Funding Gateway Network, is committed to bridging the gap between education and entrepreneurship. We equip Nigerian students with the financial support, incubation, and learning tools they need to start and grow businesses—while still in school.
+                        </p>
                     </div>
-                </div>
-                <div class="offer">
-                    <div class="offer-content">
-                        <p class="offer-title">Skill Development</p>
-                        <ul class="offer-attributes">
-                            <li class="offer-attribute">
-                                <ion-icon class="offer-icon" name="school-outline"></ion-icon>
-                                <span>Structured training programs</span>
-                            </li>
-                            <li class="offer-attribute">
-                                <ion-icon class="offer-icon" name="bulb-outline"></ion-icon>
-                                <span>Leadership and innovation skills</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="offer">
-                    <div class="offer-content">
-                        <p class="offer-title">Mentorship & Incubation</p>
-                        <ul class="offer-attributes">
-                            <li class="offer-attribute">
-                                <ion-icon class="offer-icon" name="people-outline"></ion-icon>
-                                <span>Guidance from industry experts</span>
-                            </li>
-                            <li class="offer-attribute">
-                                <ion-icon class="offer-icon" name="trending-up-outline"></ion-icon>
-                                <span>Six months of incubation</span>
-                            </li>
-                        </ul>
+                    <div class="about-img-container">
+                        <img
+                            src="{{ asset('assets/img/students_working_business_idea.jpg') }}"
+                            class="about-img"
+                            alt="Students working on business ideas"
+                        />
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- New Pronounced Links Section -->
-        <section class="pronounced-links">
+        <section class="section-benefits" id="benefits">
             <div class="container center-text">
-                <a href="https://chat.whatsapp.com/YourWhatsAppGroupLinkHere" target="_blank" class="btn btn--full">
-                    <ion-icon name="logo-whatsapp" style="font-size: 2.8rem; vertical-align: middle; margin-right: 1rem;"></ion-icon>
-                    Join Our WhatsApp Community for Updates & Support
-                </a>
-                <a href="https://www.youtube.com/@academicfunding" target="_blank" class="btn btn--full">
-                    <ion-icon name="logo-youtube" style="font-size: 2.8rem; vertical-align: middle; margin-right: 1rem;"></ion-icon>
-                    Watch Tutorials & Success Stories on YouTube
-                </a>
+                <span class="subheading">Your Journey Starts Here</span>
+                <h2 class="heading-secondary">Why Join Academic Funding?</h2>
+                <p style="font-size: 1.8rem; margin-bottom: 4.8rem; color: #666;">
+                    We don’t just offer benefits—we build futures. Here’s how we empower you:
+                </p>
             </div>
-        </section>
-
-        <!-- New Benefits Section -->
-        <section class="section-benefits">
-            <div class="container center-text">
-                <span class="subheading">Membership Benefits</span>
-                <h2 class="heading-secondary">Why You Must Register with Academic Funding</h2>
-            </div>
-            <div class="container">
-                <ul class="list" style="max-width: 80rem; margin: 0 auto;">
-                    <li class="list-item">
-                        <ion-icon class="list-icon" name="school-outline"></ion-icon>
-                        <span>Full Entrepreneurship trainings</span>
-                    </li>
-                    <li class="list-item">
-                        <ion-icon class="list-icon" name="briefcase-outline"></ion-icon>
-                        <span>Workplace trainings</span>
-                    </li>
-                    <li class="list-item">
-                        <ion-icon class="list-icon" name="notifications-outline"></ion-icon>
-                        <span>Daily update on jobs, grants, internships and fellowships</span>
-                    </li>
-                    <li class="list-item">
-                        <ion-icon class="list-icon" name="hand-right-outline"></ion-icon>
-                        <span>Direct membership and guide for any application</span>
-                    </li>
-                    <li class="list-item">
-                        <ion-icon class="list-icon" name="globe-outline"></ion-icon>
-                        <span>Access vocational training from institutions all over the world</span>
-                    </li>
-                    <li class="list-item">
-                        <ion-icon class="list-icon" name="ribbon-outline"></ion-icon>
-                        <span>Receive entrepreneurship and workplace training certificate that is recognized</span>
-                    </li>
-                </ul>
+            <div class="container grid grid--3-cols">
+                <div class="benefit-card">
+                    <div class="benefit-icon" style="background: #e3f2fd;">
+                        <ion-icon name="school-outline" style="font-size: 4rem; color: #1976d2;"></ion-icon>
+                    </div>
+                    <h3 class="benefit-title">Learn & Grow</h3>
+                    <p class="benefit-text">
+                        Access full entrepreneurship training and workplace workshops to sharpen your skills and launch your career.
+                    </p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon" style="background: #f3e5f5;">
+                        <ion-icon name="cash-outline" style="font-size: 4rem; color: #7b1fa2;"></ion-icon>
+                    </div>
+                    <h3 class="benefit-title">Fund Your Dreams</h3>
+                    <p class="benefit-text">
+                        Get grants, daily job alerts, and direct support for applications—so you never miss an opportunity.
+                    </p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon" style="background: #e8f5e8;">
+                        <ion-icon name="globe-outline" style="font-size: 4rem; color: #2e7d32;"></ion-icon>
+                    </div>
+                    <h3 class="benefit-title">Go Global</h3>
+                    <p class="benefit-text">
+                        Train with global institutions, earn recognized certificates, and expand your network worldwide.
+                    </p>
+                </div>
             </div>
         </section>
 
@@ -867,44 +751,87 @@
             <div class="container">
                 <div class="cta">
                     <div class="cta-text-box">
-                        <h2 class="heading-secondary">Launch Your Entrepreneurial Journey Today!</h2>
+                        <h2 class="heading-secondary">Ready to Launch?</h2>
                         <p class="cta-text">
-                            Have questions about our Student-to-CEO Initiative or the registration process? Our team is here to guide you every step of the way. Reach out to our admin for personalized support and start building your future as a business leader.
+                            Join thousands of students transforming their futures. Connect with us today!
                         </p>
-                        <a href="mailto:info@academicfunding.org" class="btn btn--full">Contact Us for Registration Info</a>
+                        <div class="social-icons-container">
+                            <a href="https://chat.whatsapp.com/Djl1egTVSuc5xCEkajTT5f" target="_blank" class="social-icon-large" style="background: #25d366;">
+                                <ion-icon name="logo-whatsapp" style="font-size: 4rem; color: white;"></ion-icon>
+                            </a>
+                            <a href="https://www.youtube.com/@academicfunding" target="_blank" class="social-icon-large" style="background: #ff0000;">
+                                <ion-icon name="logo-youtube" style="font-size: 4rem; color: white;"></ion-icon>
+                            </a>
+                        </div>
                     </div>
-                    <div class="cta-img-box" role="img" aria-label="Students collaborating">
-                        <img src="{{ asset('assets/img/cta.jpg') }}" alt="" style="height: 100%" />
+                    <div class="cta-img-box">
+                        <img src="{{ asset('assets/img/cta.jpg') }}" alt="Students collaborating" />
                     </div>
                 </div>
             </div>
         </section>
     </main>
+
     <footer class="footer">
         <div class="container">
-            <div class="logo-col">
-                <a href="#" class="footer-logo">
-                    <img class="logo" alt="Academic Funding Gateway logo" src="{{ asset('assets/img/logo-light-transparent.png') }}" />
-                </a>
-                <address class="contacts">
-                    <p class="address">NO 3 TAURA CLOSE 2/2 KUBWA, ABUJA, FCT</p>
-                    <p>
-                        <a class="footer-link" href="tel:08030634841">09134448135</a><br />
-                        <a class="footer-link" href="mailto:victoruadaji1@gmail.com">info@academicfunding.org</a>
+            <div class="footer-content" style="padding: 4rem 0;">
+                <div>
+                    <a href="#" class="footer-logo">
+                        <img class="logo" alt="Academic Funding Gateway logo" src="{{ asset('assets/img/logo-light-transparent.png') }}" />
+                    </a>
+                    <p style="font-size: 1.4rem; margin-top: 1.6rem; color: #ccc;">
+                        NO 3 TAURA CLOSE 2/2 KUBWA, ABUJA, FCT<br>
+                        <a class="footer-link" href="tel:09134448135" style="color: #aaa;">09134448135</a> |
+                        <a class="footer-link" href="mailto:info@academicfunding.org" style="color: #aaa;">info@academicfunding.org</a>
                     </p>
-                </address>
-                <p class="copyright">
-                    &copy; 2025 Academic Funding Gateway. All Rights Reserved.
-                </p>
+                </div>
+                <div style="text-align: right;">
+                    <p style="font-size: 1.4rem; color: #ccc;">&copy; 2026 Academic Funding Gateway. All Rights Reserved.</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <!-- Optional extra copyright line if needed -->
             </div>
         </div>
     </footer>
+
     <script>
+        // Mobile navigation
         document.querySelector('.btn-mobile-nav').addEventListener('click', function () {
             const nav = document.querySelector('.main-nav');
             const isExpanded = this.getAttribute('aria-expanded') === 'true';
             this.setAttribute('aria-expanded', !isExpanded);
             nav.classList.toggle('active');
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Scroll animations
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.benefit-card, .cta');
+            elements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight * 0.85) {
+                    el.classList.add('visible');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+
+        // Initial state
+        document.querySelectorAll('.benefit-card, .cta').forEach(el => {
+            el.style.transition = 'all 0.6s ease';
         });
     </script>
 </body>
