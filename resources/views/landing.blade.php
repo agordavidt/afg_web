@@ -142,6 +142,25 @@
             box-shadow: inset 0 0 0 3px #fff;
         }
 
+        .btn--whatsapp {
+            background-color: var(--color-whatsapp);
+            color: #fff;
+            font-size: 2.2rem;
+            padding: 2rem 4rem;
+        }
+        .btn--whatsapp:hover {
+            background-color: #128C7E;
+        }
+        .btn--youtube {
+            background-color: var(--color-youtube);
+            color: #fff;
+            font-size: 2.2rem;
+            padding: 2rem 4rem;
+        }
+        .btn--youtube:hover {
+            background-color: #CC0000;
+        }
+
         .center-text {
             text-align: center;
         }
@@ -352,15 +371,14 @@
 
         .about-img-container {
             display: flex;
-            align-items: stretch;
+            align-items: center;
             border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
         }
 
         .about-img {
-            width: 100%;
-            height: 100%;
+          
             object-fit: cover;
             transition: transform 0.3s ease;
         }
@@ -434,14 +452,20 @@
 
         .cta .heading-secondary {
             color: inherit;
-            margin-bottom: 2.4rem;
-            font-size: 3.6rem;
+            margin-bottom: 2rem;
+            font-size: 3.3rem;
         }
 
         .cta-text {
             font-size: 1.7rem;
             line-height: 1.6;
             margin-bottom: 3.2rem;
+        }
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 3.2rem;
+            flex-wrap: wrap;
         }
 
         .social-icons-container {
@@ -687,19 +711,19 @@
 
         <section class="section-about" id="about">
             <div class="container center-text">
-                <span class="subheading">About Us</span>
-                <h2 class="heading-secondary">Empowering Students to Become Entrepreneurs</h2>
+                <span class="subheading" style="margin-bottom: 30px;">About Us</span>                
             </div>
             <div class="container">
                 <div class="about-grid">
                     <div class="about-text-box">
+                        <h2 class="heading-secondary">Empowering Students to Become Entrepreneurs</h2>
                         <p class="about-description">
                             The Student-to-CEO Initiative, powered by the Academic Funding Gateway Network, is committed to bridging the gap between education and entrepreneurship. We equip Nigerian students with the financial support, incubation, and learning tools they need to start and grow businesses—while still in school.
                         </p>
                     </div>
                     <div class="about-img-container">
                         <img
-                            src="{{ asset('assets/img/students_working_business_idea.jpg') }}"
+                            src="{{ asset('assets/img/ac_funding.jpg') }}"
                             class="about-img"
                             alt="Students working on business ideas"
                         />
@@ -755,12 +779,14 @@
                         <p class="cta-text">
                             Join thousands of students transforming their futures. Connect with us today!
                         </p>
-                        <div class="social-icons-container">
-                            <a href="https://chat.whatsapp.com/Djl1egTVSuc5xCEkajTT5f" target="_blank" class="social-icon-large" style="background: #25d366;">
-                                <ion-icon name="logo-whatsapp" style="font-size: 4rem; color: white;"></ion-icon>
+                        <div class="cta-buttons">
+                            <a href="https://chat.whatsapp.com/YourWhatsAppGroupLinkHere" target="_blank" class="btn btn--whatsapp">
+                                <ion-icon name="logo-whatsapp" style="font-size: 3.2rem; vertical-align: middle; margin-right: 1.2rem;"></ion-icon>
+                                Join WhatsApp Community
                             </a>
-                            <a href="https://www.youtube.com/@academicfunding" target="_blank" class="social-icon-large" style="background: #ff0000;">
-                                <ion-icon name="logo-youtube" style="font-size: 4rem; color: white;"></ion-icon>
+                            <a href="https://www.youtube.com/@academicfunding" target="_blank" class="btn btn--youtube">
+                                <ion-icon name="logo-youtube" style="font-size: 3.2rem; vertical-align: middle; margin-right: 1.2rem;"></ion-icon>
+                                Subscribe on YouTube
                             </a>
                         </div>
                     </div>
@@ -790,7 +816,7 @@
                 </div>
             </div>
             <div class="copyright">
-                <!-- Optional extra copyright line if needed -->
+               
             </div>
         </div>
     </footer>
