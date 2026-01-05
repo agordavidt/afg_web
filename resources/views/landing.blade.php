@@ -806,7 +806,7 @@
                         <img class="logo" alt="Academic Funding Gateway logo" src="{{ asset('assets/img/logo-light-transparent.png') }}" />
                     </a>
                     <p style="font-size: 1.4rem; margin-top: 1.6rem; color: #ccc;">
-                        NO 3 TAURA CLOSE 2/2 KUBWA, ABUJA, FCT<br>
+                        Besides Transformer Orange farm Byhazin Accross, Kubwa Abuja<br>
                         <a class="footer-link" href="tel:09134448135" style="color: #aaa;">09134448135</a> |
                         <a class="footer-link" href="mailto:info@academicfunding.org" style="color: #aaa;">info@academicfunding.org</a>
                     </p>
