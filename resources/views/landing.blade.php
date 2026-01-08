@@ -148,8 +148,8 @@
             font-size: 2.2rem;
             padding: 2rem 4rem;
         }
-        .btn--whatsapp:hover {
-            background-color: #128C7E;
+        .btn--whatsapp:hover {            
+            color: #128C7E;
         }
         .btn--youtube {
             background-color: var(--color-youtube);
@@ -157,8 +157,8 @@
             font-size: 2.2rem;
             padding: 2rem 4rem;
         }
-        .btn--youtube:hover {
-            background-color: #CC0000;
+        .btn--youtube:hover {           
+            color: #128C7E;
         }
 
         .center-text {
@@ -461,12 +461,7 @@
             line-height: 1.6;
             margin-bottom: 3.2rem;
         }
-        .cta-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 3.2rem;
-            flex-wrap: wrap;
-        }
+      
 
         .social-icons-container {
             display: flex;
@@ -781,12 +776,12 @@
                         </p>
                         <div class="cta-buttons">
                             <a href="https://chat.whatsapp.com/YourWhatsAppGroupLinkHere" target="_blank" class="btn btn--whatsapp">
-                                <ion-icon name="logo-whatsapp" style="font-size: 3.2rem; vertical-align: middle; margin-right: 1.2rem;"></ion-icon>
-                                Join WhatsApp Community
+                                {{-- <ion-icon name="logo-whatsapp" style="font-size: 3.2rem; vertical-align: middle; margin-right: 1.2rem;"></ion-icon> --}}
+                               Join our community for daily updates
                             </a>
                             <a href="https://www.youtube.com/@academicfunding" target="_blank" class="btn btn--youtube">
-                                <ion-icon name="logo-youtube" style="font-size: 3.2rem; vertical-align: middle; margin-right: 1.2rem;"></ion-icon>
-                                Subscribe on YouTube
+                                {{-- <ion-icon name="logo-youtube" style="font-size: 3.2rem; vertical-align: middle; margin-right: 1.2rem;"></ion-icon> --}}
+                                Join our classroom for free
                             </a>
                         </div>
                     </div>
