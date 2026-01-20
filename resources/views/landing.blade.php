@@ -142,23 +142,89 @@
             box-shadow: inset 0 0 0 3px #fff;
         }
 
+        /* Animated WhatsApp button */
         .btn--whatsapp {
-            background-color: var(--color-whatsapp);
+            border: 1px solid #25D366;
             color: #fff;
-            font-size: 2.2rem;
-            padding: 2rem 4rem;
+            font-size:1.8rem;
+            padding: 1.8rem 3.5rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            animation: pulse 2s infinite, float 3s ease-in-out infinite;
         }
+
         .btn--whatsapp:hover {            
-            color: #128C7E;
+            border: 1px solid #20b358;
+            color: #25D366;
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+            transform: translateY(-2px);
         }
+
+        .btn--whatsapp:active {
+            transform: translateY(1px);
+        }
+
+        /* Animated YouTube button */
         .btn--youtube {
-            background-color: var(--color-youtube);
+            border: 1px solid #25D366;
             color: #fff;
-            font-size: 2.2rem;
-            padding: 2rem 4rem;
+            font-size: 1.8rem;
+            padding: 1.8rem 3.5rem;
+            position: relative;
+            overflow: hidden;
+             box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+            animation: pulse 2s infinite, float 3s ease-in-out infinite;
         }
+
         .btn--youtube:hover {           
-            color: #128C7E;
+            border: 1px solid #25D366;
+            color: #25D366;
+             box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+            transform: translateY(-2px);
+        }
+
+        .btn--youtube:active {
+            transform: translateY(1px);
+        }
+
+        /* Button animations */
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            }
+            50% {
+                box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+            }
+            100% {
+                box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* WhatsApp specific pulse for YouTube button */
+        .btn--youtube {
+            animation: pulse-youtube 2s infinite;
+        }
+
+        @keyframes pulse-youtube {
+            0% {
+                box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            }
+            50% {
+                box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+            }
+            100% {
+                box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            }
         }
 
         .center-text {
@@ -659,6 +725,11 @@
             .social-icons-container {
                 gap: 1.2rem;
             }
+
+            .btn--whatsapp, .btn--youtube {
+                font-size: 1.8rem;
+                padding: 1.4rem 2.8rem;
+            }
         }
     </style>
 </head>
@@ -732,7 +803,7 @@
                 <span class="subheading">Your Journey Starts Here</span>
                 <h2 class="heading-secondary">Why Join Academic Funding?</h2>
                 <p style="font-size: 1.8rem; margin-bottom: 4.8rem; color: #666;">
-                    We don’t just offer benefits—we build futures. Here’s how we empower you:
+                    We don't just offer benefits—we build futures. Here's how we empower you:
                 </p>
             </div>
             <div class="container grid grid--3-cols">
@@ -777,11 +848,11 @@
                         <div class="cta-buttons">
                             <a href="https://chat.whatsapp.com/YourWhatsAppGroupLinkHere" target="_blank" class="btn btn--whatsapp">
                                 {{-- <ion-icon name="logo-whatsapp" style="font-size: 3.2rem; vertical-align: middle; margin-right: 1.2rem;"></ion-icon> --}}
-                               Join our community for daily updates
+                                JOIN OUR COMMUNITY FOR DAILY JOB OFFERS
                             </a>
                             <a href="https://www.youtube.com/@academicfunding" target="_blank" class="btn btn--youtube">
                                 {{-- <ion-icon name="logo-youtube" style="font-size: 3.2rem; vertical-align: middle; margin-right: 1.2rem;"></ion-icon> --}}
-                                Join our classroom for free
+                                ACCESS OTTINIC BUSINESS SCHOOL FOR FREE
                             </a>
                         </div>
                     </div>
@@ -853,6 +924,17 @@
         // Initial state
         document.querySelectorAll('.benefit-card, .cta').forEach(el => {
             el.style.transition = 'all 0.6s ease';
+        });
+
+        // Add staggered animation for CTA buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const whatsappBtn = document.querySelector('.btn--whatsapp');
+            const youtubeBtn = document.querySelector('.btn--youtube');
+            
+            if (whatsappBtn && youtubeBtn) {
+                whatsappBtn.style.animationDelay = '0.2s';
+                youtubeBtn.style.animationDelay = '0.4s';
+            }
         });
     </script>
 </body>
