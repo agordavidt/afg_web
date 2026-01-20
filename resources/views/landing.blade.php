@@ -144,9 +144,9 @@
 
         /* Animated WhatsApp button */
         .btn--whatsapp {
-            border: 1px solid #25D366;
+            border: 1px solid #fff;
             color: #fff;
-            font-size:1.8rem;
+            font-size: 2.2rem;
             padding: 1.8rem 3.5rem;
             position: relative;
             overflow: hidden;
@@ -155,9 +155,9 @@
         }
 
         .btn--whatsapp:hover {            
-            border: 1px solid #20b358;
-            color: #25D366;
+            /* background-color: #20b358; */
             box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+            border: 1px solid #fff;
             transform: translateY(-2px);
         }
 
@@ -167,20 +167,20 @@
 
         /* Animated YouTube button */
         .btn--youtube {
-            border: 1px solid #25D366;
+             border: 1px solid #fff;
             color: #fff;
-            font-size: 1.8rem;
+            font-size: 2.2rem;
             padding: 1.8rem 3.5rem;
             position: relative;
             overflow: hidden;
-             box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+             box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
             animation: pulse 2s infinite, float 3s ease-in-out infinite;
         }
 
         .btn--youtube:hover {           
-            border: 1px solid #25D366;
-            color: #25D366;
-             box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+            /* background-color: #cc0000; */
+            border: 1px solid #fff;
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
             transform: translateY(-2px);
         }
 
@@ -359,6 +359,7 @@
 
         .hero-img {
             width: 100%;
+            height: auto;
             border-radius: 12px;
             transform: scale(1.02);
             transition: transform 0.5s;
@@ -444,7 +445,8 @@
         }
 
         .about-img {
-          
+            width: 100%;
+            height: auto;
             object-fit: cover;
             transition: transform 0.3s ease;
         }
@@ -527,7 +529,12 @@
             line-height: 1.6;
             margin-bottom: 3.2rem;
         }
-      
+
+        .cta-buttons {
+            display: flex;
+            gap: 2.4rem;
+            align-items: center;
+        }
 
         .social-icons-container {
             display: flex;
@@ -615,15 +622,17 @@
             border-top: 1px solid #444;
         }
 
-        /* Responsive */
+        /* Responsive Media Queries */
+        /* Below 1200px (75em) - Tablets and landscapes */
         @media (max-width: 75em) {
             .container {
+                max-width: 114rem;
                 padding: 0 2.4rem;
             }
 
             .grid--2-cols,
-            .grid--3-cols,
-            .about-grid {
+            .about-grid,
+            .cta {
                 grid-template-columns: 1fr;
                 row-gap: 4.8rem;
             }
@@ -634,20 +643,35 @@
                 gap: 3.2rem;
             }
 
-            .cta {
-                grid-template-columns: 1fr;
+            .hero-text-box {
+                text-align: center;
             }
 
             .cta-img-box {
                 min-height: 40rem;
+                order: -1; /* Image above text on stack */
+            }
+
+            .cta-text-box {
+                text-align: center;
+            }
+
+            .cta-buttons {
+                justify-content: center;
+                flex-wrap: wrap;
             }
 
             .footer-content {
                 grid-template-columns: 1fr;
                 text-align: center;
             }
+
+            .logos {
+                gap: 3.2rem;
+            }
         }
 
+        /* Below 944px (59em) - Tablets */
         @media (max-width: 59em) {
             html {
                 font-size: 56.25%;
@@ -665,6 +689,7 @@
                 width: 100%;
                 background-color: var(--color-light-background);
                 padding: 2.4rem;
+                z-index: 99;
             }
 
             .main-nav.active {
@@ -696,8 +721,56 @@
             .heading-secondary {
                 font-size: 3.2rem;
             }
+
+            .hero-description {
+                font-size: 1.8rem;
+            }
+
+            .grid--3-cols {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .benefit-icon {
+                width: 7rem;
+                height: 7rem;
+            }
+
+            .benefit-title {
+                font-size: 2rem;
+            }
+
+            .benefit-text {
+                font-size: 1.5rem;
+            }
+
+            .cta .heading-secondary {
+                font-size: 3rem;
+            }
+
+            .cta-text {
+                font-size: 1.6rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                gap: 1.6rem;
+            }
+
+            .btn--whatsapp,
+            .btn--youtube {
+                font-size: 2rem;
+                padding: 1.6rem 3rem;
+            }
+
+            .section-hero,
+            .section-about,
+            .section-benefits,
+            .section-cta {
+                padding: 6.4rem 0;
+            }
         }
 
+        /* Below 544px (34em) - Mobile */
         @media (max-width: 34em) {
             html {
                 font-size: 50%;
@@ -705,6 +778,40 @@
 
             .container {
                 padding: 0 1.6rem;
+            }
+
+            .grid {
+                row-gap: 4.8rem;
+                column-gap: 3.2rem;
+            }
+
+            .grid--3-cols {
+                grid-template-columns: 1fr;
+            }
+
+            .heading-primary {
+                font-size: 3.6rem;
+            }
+
+            .heading-secondary {
+                font-size: 2.8rem;
+            }
+
+            .hero-description {
+                font-size: 1.6rem;
+            }
+
+            .btn,
+            .btn:link,
+            .btn:visited {
+                font-size: 1.6rem;
+                padding: 1.2rem 2.4rem;
+            }
+
+            .btn--whatsapp,
+            .btn--youtube {
+                font-size: 1.8rem;
+                padding: 1.4rem 2.8rem;
             }
 
             .section-hero,
@@ -726,9 +833,37 @@
                 gap: 1.2rem;
             }
 
-            .btn--whatsapp, .btn--youtube {
+            .benefit-card {
+                padding: 2.4rem;
+            }
+
+            .benefit-icon {
+                width: 6rem;
+                height: 6rem;
+            }
+
+            .benefit-title {
                 font-size: 1.8rem;
-                padding: 1.4rem 2.8rem;
+            }
+
+            .benefit-text {
+                font-size: 1.4rem;
+            }
+
+            .cta-text-box {
+                padding: 3.2rem;
+            }
+
+            .cta-img-box {
+                min-height: 30rem;
+            }
+
+            .footer {
+                padding: 3.2rem 0;
+            }
+
+            .footer-logo img {
+                height: 3.2rem;
             }
         }
     </style>
@@ -803,7 +938,7 @@
                 <span class="subheading">Your Journey Starts Here</span>
                 <h2 class="heading-secondary">Why Join Academic Funding?</h2>
                 <p style="font-size: 1.8rem; margin-bottom: 4.8rem; color: #666;">
-                    We don't just offer benefits—we build futures. Here's how we empower you:
+                    We don’t just offer benefits—we build futures. Here’s how we empower you:
                 </p>
             </div>
             <div class="container grid grid--3-cols">
@@ -847,12 +982,12 @@
                         </p>
                         <div class="cta-buttons">
                             <a href="https://chat.whatsapp.com/YourWhatsAppGroupLinkHere" target="_blank" class="btn btn--whatsapp">
-                                {{-- <ion-icon name="logo-whatsapp" style="font-size: 3.2rem; vertical-align: middle; margin-right: 1.2rem;"></ion-icon> --}}
+                                
                                 JOIN OUR COMMUNITY FOR DAILY JOB OFFERS
                             </a>
                             <a href="https://www.youtube.com/@academicfunding" target="_blank" class="btn btn--youtube">
-                                {{-- <ion-icon name="logo-youtube" style="font-size: 3.2rem; vertical-align: middle; margin-right: 1.2rem;"></ion-icon> --}}
-                                ACCESS OTTINIC BUSINESS SCHOOL FOR FREE
+                               
+                                ACCESS OTINIC BUSINESS SCHOOL FOR FREE
                             </a>
                         </div>
                     </div>
