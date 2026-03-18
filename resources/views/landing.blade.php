@@ -8,18 +8,28 @@
     <link rel="icon" href="{{ asset('assets/img/logo-favicon.png') }}" />
     <link rel="apple-touch-icon" href="{{ asset('img/apple-touch-icon.png') }}" />
     <link rel="manifest" href="{{ asset('manifest.webmanifest') }}" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
     <script type="module" src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.js"></script>
     <script defer src="https://unpkg.com/smoothscroll-polyfill@0.4.4/dist/smoothscroll.min.js"></script>
     <title>Academic Funding Gateway &mdash; From Student to CEO</title>
     <style>
         :root {
-            --color-light-background: #f9f7f0;
-            --color-primary: #18b7be;
-            --color-secondary: #178ca4;
-            --color-dark: #072a40;
+            /* Logo-derived palette */
+            --color-primary:       #393B8F;   /* logo blue */
+            --color-primary-light: #4E51B0;   /* lighter shade */
+            --color-primary-dark:  #272869;   /* darker shade */
+            --color-secondary:     #178CA4;   /* teal accent */
+            --color-secondary-light: #1DACCB;
+
+            /* Neutrals from logo's #D4D4D4 */
+            --color-light-background: #E8E8F0; /* blue-tinted light gray */
+            --color-surface:    #F3F3F8;
+            --color-muted:      #D4D4D4;       /* logo gray */
+            --color-dark:       #1A1B3A;       /* deep navy-dark */
+            --color-body:       #3D3F6B;       /* mid blue-gray body text */
         }
 
         * {
@@ -35,12 +45,16 @@
         }
 
         body {
-            font-family: "Rubik", sans-serif;
+            font-family: "DM Sans", sans-serif;
             line-height: 1.6;
             font-weight: 400;
             color: var(--color-dark);
             overflow-x: hidden;
             background-color: var(--color-light-background);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: "Syne", sans-serif;
         }
 
         .container {
@@ -55,52 +69,32 @@
             row-gap: 6.4rem;
         }
 
-        .grid--2-cols {
-            grid-template-columns: repeat(2, 1fr);
-        }
-
-        .grid--3-cols {
-            grid-template-columns: repeat(3, 1fr);
-        }
-
-        .grid--center-v {
-            align-items: center;
-        }
+        .grid--2-cols  { grid-template-columns: repeat(2, 1fr); }
+        .grid--3-cols  { grid-template-columns: repeat(3, 1fr); }
+        .grid--center-v { align-items: center; }
 
         .heading-primary,
         .heading-secondary,
         .heading-tertiary {
+            font-family: "Syne", sans-serif;
             font-weight: 700;
             color: var(--color-dark);
             letter-spacing: -0.5px;
         }
 
-        .heading-primary {
-            font-size: 5.2rem;
-            line-height: 1.05;
-            margin-bottom: 3.2rem;
-        }
-
-        .heading-secondary {
-            font-size: 4.4rem;
-            line-height: 1.2;
-            margin-bottom: 4.8rem;
-        }
-
-        .heading-tertiary {
-            font-size: 3rem;
-            line-height: 1.2;
-            margin-bottom: 3.2rem;
-        }
+        .heading-primary   { font-size: 5.2rem; line-height: 1.05; margin-bottom: 3.2rem; }
+        .heading-secondary { font-size: 4.4rem; line-height: 1.2;  margin-bottom: 4.8rem; }
+        .heading-tertiary  { font-size: 3rem;   line-height: 1.2;  margin-bottom: 3.2rem; }
 
         .subheading {
             display: block;
-            font-size: 1.6rem;
-            font-weight: 500;
-            color: var(--color-primary);
+            font-family: "Syne", sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--color-secondary);
             text-transform: uppercase;
             margin-bottom: 1.6rem;
-            letter-spacing: 0.75px;
+            letter-spacing: 0.18em;
         }
 
         .btn,
@@ -108,13 +102,14 @@
         .btn:visited {
             display: inline-block;
             text-decoration: none;
-            font-size: 1.8rem;
-            font-weight: 600;
+            font-family: "Syne", sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
             padding: 1.4rem 2.8rem;
             border-radius: 9px;
             border: none;
             cursor: pointer;
-            font-family: inherit;
             transition: all 0.3s;
         }
 
@@ -126,115 +121,81 @@
 
         .btn--full:hover,
         .btn--full:active {
-            background-color: var(--color-secondary);
+            background-color: var(--color-primary-dark);
         }
 
         .btn--outline:link,
         .btn--outline:visited {
-            background-color: #fff;
-            color: var(--color-dark);
-            border: 1px solid #ddd;
+            background-color: transparent;
+            color: #fff;
+            border: 1.5px solid rgba(255,255,255,0.55);
         }
 
         .btn--outline:hover,
         .btn--outline:active {
-            background-color: var(--color-light-background);
-            box-shadow: inset 0 0 0 3px #fff;
+            background-color: rgba(255,255,255,0.1);
+            border-color: #fff;
         }
 
-        /* Animated WhatsApp button */
         .btn--whatsapp {
-            border: 1px solid #fff;
+            border: 1.5px solid rgba(255,255,255,0.6);
             color: #fff;
-            font-size: 2.2rem;
+            font-size: 1.5rem;
             padding: 1.8rem 3.5rem;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            box-shadow: 0 4px 15px rgba(57, 59, 143, 0.35);
             animation: pulse 2s infinite, float 3s ease-in-out infinite;
         }
 
-        .btn--whatsapp:hover {            
-            /* background-color: #20b358; */
-            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
-            border: 1px solid #fff;
+        .btn--whatsapp:hover {
+            box-shadow: 0 6px 20px rgba(57, 59, 143, 0.55);
+            border-color: #fff;
             transform: translateY(-2px);
         }
 
-        .btn--whatsapp:active {
-            transform: translateY(1px);
-        }
+        .btn--whatsapp:active { transform: translateY(1px); }
 
-        /* Animated YouTube button */
         .btn--youtube {
-             border: 1px solid #fff;
+            border: 1.5px solid rgba(255,255,255,0.6);
             color: #fff;
-            font-size: 2.2rem;
+            font-size: 1.5rem;
             padding: 1.8rem 3.5rem;
             position: relative;
             overflow: hidden;
-             box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
-            animation: pulse 2s infinite, float 3s ease-in-out infinite;
-        }
-
-        .btn--youtube:hover {           
-            /* background-color: #cc0000; */
-            border: 1px solid #fff;
-            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
-            transform: translateY(-2px);
-        }
-
-        .btn--youtube:active {
-            transform: translateY(1px);
-        }
-
-        /* Button animations */
-        @keyframes pulse {
-            0% {
-                box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
-            }
-            50% {
-                box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
-            }
-            100% {
-                box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
-            }
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0px);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-
-        /* WhatsApp specific pulse for YouTube button */
-        .btn--youtube {
+            box-shadow: 0 4px 15px rgba(23, 140, 164, 0.35);
             animation: pulse-youtube 2s infinite;
         }
 
+        .btn--youtube:hover {
+            border-color: #fff;
+            box-shadow: 0 6px 20px rgba(23, 140, 164, 0.55);
+            transform: translateY(-2px);
+        }
+
+        .btn--youtube:active { transform: translateY(1px); }
+
+        @keyframes pulse {
+            0%   { box-shadow: 0 4px 15px rgba(57, 59, 143, 0.35); }
+            50%  { box-shadow: 0 6px 20px rgba(57, 59, 143, 0.55); }
+            100% { box-shadow: 0 4px 15px rgba(57, 59, 143, 0.35); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50%       { transform: translateY(-10px); }
+        }
+
         @keyframes pulse-youtube {
-            0% {
-                box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
-            }
-            50% {
-                box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
-            }
-            100% {
-                box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
-            }
+            0%   { box-shadow: 0 4px 15px rgba(23, 140, 164, 0.35); }
+            50%  { box-shadow: 0 6px 20px rgba(23, 140, 164, 0.55); }
+            100% { box-shadow: 0 4px 15px rgba(23, 140, 164, 0.35); }
         }
 
-        .center-text {
-            text-align: center;
-        }
+        .center-text { text-align: center; }
+        strong { font-weight: 600; }
 
-        strong {
-            font-weight: 600;
-        }
-
+        /* ── HEADER ── */
         .header {
             display: flex;
             justify-content: space-between;
@@ -246,9 +207,7 @@
             z-index: 100;
         }
 
-        .logo {
-            height: clamp(2.8rem, 4vw, 3.2rem);
-        }
+        .logo { height: clamp(4.5rem, 6vw, 6rem); }
 
         .main-nav-list {
             list-style: none;
@@ -262,15 +221,16 @@
             display: inline-block;
             text-decoration: none;
             color: var(--color-dark);
-            font-weight: 500;
-            font-size: 1.7rem;
+            font-family: "Syne", sans-serif;
+            font-weight: 600;
+            font-size: 1.45rem;
+            letter-spacing: 0.07em;
+            text-transform: uppercase;
             transition: all 0.3s;
         }
 
         .main-nav-link:hover,
-        .main-nav-link:active {
-            color: var(--color-secondary);
-        }
+        .main-nav-link:active { color: var(--color-secondary); }
 
         .main-nav-link.nav-cta:link,
         .main-nav-link.nav-cta:visited {
@@ -281,9 +241,7 @@
         }
 
         .main-nav-link.nav-cta:hover,
-        .main-nav-link.nav-cta:active {
-            background-color: var(--color-secondary);
-        }
+        .main-nav-link.nav-cta:active { background-color: var(--color-primary-dark); }
 
         .btn-mobile-nav {
             border: none;
@@ -298,9 +256,7 @@
             color: var(--color-dark);
         }
 
-        .icon-mobile-nav[name="close-outline"] {
-            display: none;
-        }
+        .icon-mobile-nav[name="close-outline"] { display: none; }
 
         .sticky .header {
             position: fixed;
@@ -308,15 +264,14 @@
             width: 100%;
             height: 8rem;
             padding: 0 2.4rem;
-            background-color: rgba(255, 255, 255, 0.97);
-            box-shadow: 0 1.2rem 3.2rem rgba(0, 0, 0, 0.03);
+            background-color: rgba(232, 232, 240, 0.97);
+            box-shadow: 0 1.2rem 3.2rem rgba(57, 59, 143, 0.08);
             z-index: 999;
         }
 
-        .sticky .section-hero {
-            margin-top: 9.6rem;
-        }
+        .sticky .section-hero { margin-top: 9.6rem; }
 
+        /* ── HERO ── */
         .section-hero {
             background: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop') no-repeat center center/cover;
             position: relative;
@@ -326,16 +281,19 @@
 
         @keyframes fadeIn {
             from { opacity: 0; }
-            to { opacity: 1; }
+            to   { opacity: 1; }
         }
 
         .hero-overlay {
-            background-color: rgba(7, 42, 64, 0.7);
+            background: linear-gradient(
+                155deg,
+                rgba(26, 27, 58, 0.90) 0%,
+                rgba(57, 59, 143, 0.78) 55%,
+                rgba(23, 140, 164, 0.45) 100%
+            );
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
         }
 
         .hero {
@@ -354,7 +312,7 @@
             font-size: 1.9rem;
             line-height: 1.6;
             margin-bottom: 3.2rem;
-            color: #fff;
+            color: var(--color-muted);
         }
 
         .hero-img {
@@ -365,13 +323,10 @@
             transition: transform 0.5s;
         }
 
-        .hero-img:hover {
-            transform: scale(1.05);
-        }
+        .hero-img:hover { transform: scale(1.05); }
 
-        .section-featured {
-            padding: 3.2rem 0;
-        }
+        /* ── FEATURED ── */
+        .section-featured { padding: 3.2rem 0; }
 
         .heading-featured-in {
             font-size: 1.4rem;
@@ -398,39 +353,25 @@
             transition: all 0.3s;
         }
 
-        .logos img:hover {
-            opacity: 100%;
-            filter: brightness(1);
-        }
+        .logos img:hover { opacity: 100%; filter: brightness(1); }
 
-        /* Alternating section backgrounds */
-        .section-about {
-            padding: 8rem 0;
-            background-color: #fff; /* White */
-        }
+        /* ── SECTION BGs ── */
+        .section-about    { padding: 8rem 0;   background-color: #fff; }
+        .section-benefits { padding: 9.6rem 0; background-color: var(--color-light-background); }
+        .section-cta      { padding: 6.4rem 0; background-color: #fff; }
 
-        .section-benefits {
-            padding: 9.6rem 0;
-            background-color: var(--color-light-background); /* Light beige */
-        }
-
-        .section-cta {
-            padding: 6.4rem 0;
-            background-color: #fff; /* Keeps contrast before dark footer */
-        }
-
-        /* About Us - Equal height columns */
+        /* ── ABOUT ── */
         .about-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 6.4rem;
-            align-items: stretch; /* Key: makes both columns same height */
+            align-items: stretch;
         }
 
         .about-text-box {
             font-size: 1.7rem;
             line-height: 1.8;
-            color: #555;
+            color: var(--color-body);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -441,7 +382,7 @@
             align-items: center;
             border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 32px rgba(57, 59, 143, 0.12);
         }
 
         .about-img {
@@ -451,24 +392,25 @@
             transition: transform 0.3s ease;
         }
 
-        .about-img:hover {
-            transform: scale(1.05);
-        }
+        .about-img:hover { transform: scale(1.05); }
 
+        /* ── BENEFIT CARDS ── */
         .benefit-card {
             background: white;
             padding: 3.2rem;
             border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 16px rgba(57, 59, 143, 0.08);
             transition: all 0.3s ease;
             text-align: center;
             opacity: 0;
             transform: translateY(20px);
         }
 
-        .benefit-card.visible {
-            opacity: 1;
-            transform: translateY(0);
+        .benefit-card.visible { opacity: 1; transform: translateY(0); }
+
+        .benefit-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 32px rgba(57, 59, 143, 0.15);
         }
 
         .benefit-icon {
@@ -482,7 +424,9 @@
         }
 
         .benefit-title {
+            font-family: "Syne", sans-serif;
             font-size: 2.2rem;
+            font-weight: 700;
             margin-bottom: 1.6rem;
             color: var(--color-dark);
         }
@@ -490,25 +434,28 @@
         .benefit-text {
             font-size: 1.6rem;
             line-height: 1.6;
-            color: #555;
+            color: var(--color-body);
         }
 
+        /* ── CTA ── */
         .cta {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2.4rem 4.8rem rgba(57, 59, 143, 0.2);
             border-radius: 11px;
-            background-image: linear-gradient(to right bottom, var(--color-primary), var(--color-secondary));
+            background-image: linear-gradient(
+                to right bottom,
+                var(--color-primary-dark),
+                var(--color-primary),
+                var(--color-secondary)
+            );
             overflow: hidden;
             opacity: 0;
             transform: translateY(20px);
             transition: all 0.5s;
         }
 
-        .cta.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .cta.visible { opacity: 1; transform: translateY(0); }
 
         .cta-text-box {
             padding: 4.8rem;
@@ -528,6 +475,7 @@
             font-size: 1.7rem;
             line-height: 1.6;
             margin-bottom: 3.2rem;
+            color: var(--color-muted);
         }
 
         .cta-buttons {
@@ -536,35 +484,12 @@
             align-items: center;
         }
 
-        .social-icons-container {
-            display: flex;
-            gap: 1.6rem; /* Reduced from 2.4rem */
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 3.2rem;
-        }
-
-        .social-icon-large {
-            width: 7rem;
-            height: 7rem;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .social-icon-large:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-        }
-
         .cta-img-box {
             min-height: 30rem;
             background-image: linear-gradient(
                 to right bottom,
-                rgba(24, 183, 190, 0.35),
-                rgba(23, 140, 164, 0.35)
+                rgba(57, 59, 143, 0.4),
+                rgba(23, 140, 164, 0.3)
             ),
             url("https://images.unsplash.com/photo-1522204523234-8729aa6e993e?q=80&w=2070&auto=format&fit=crop");
             background-size: cover;
@@ -579,9 +504,10 @@
             display: block;
         }
 
+        /* ── FOOTER ── */
         .footer {
             padding: 4.8rem 0;
-            border-top: 1px solid #eee;
+            border-top: 1px solid rgba(57, 59, 143, 0.15);
             background-color: var(--color-dark);
             color: #fff;
         }
@@ -593,9 +519,7 @@
             align-items: center;
         }
 
-        .footer-logo img {
-            height: 4rem;
-        }
+        .footer-logo img { height: 4rem; }
 
         .contacts {
             font-style: normal;
@@ -604,14 +528,12 @@
         }
 
         .contacts a {
-            color: #aaa;
+            color: var(--color-muted);
             text-decoration: none;
             transition: color 0.3s;
         }
 
-        .contacts a:hover {
-            color: var(--color-primary);
-        }
+        .contacts a:hover { color: var(--color-secondary-light); }
 
         .copyright {
             font-size: 1.4rem;
@@ -619,67 +541,32 @@
             text-align: center;
             margin-top: 2.4rem;
             padding-top: 2.4rem;
-            border-top: 1px solid #444;
+            border-top: 1px solid rgba(255,255,255,0.08);
         }
 
-        /* Responsive Media Queries */
-        /* Below 1200px (75em) - Tablets and landscapes */
+        /* ── RESPONSIVE ── */
         @media (max-width: 75em) {
-            .container {
-                max-width: 114rem;
-                padding: 0 2.4rem;
-            }
+            .container { max-width: 114rem; padding: 0 2.4rem; }
 
             .grid--2-cols,
             .about-grid,
-            .cta {
-                grid-template-columns: 1fr;
-                row-gap: 4.8rem;
-            }
+            .cta { grid-template-columns: 1fr; row-gap: 4.8rem; }
 
-            .hero {
-                grid-template-columns: 1fr;
-                text-align: center;
-                gap: 3.2rem;
-            }
+            .hero { grid-template-columns: 1fr; text-align: center; gap: 3.2rem; }
+            .hero-text-box { text-align: center; }
 
-            .hero-text-box {
-                text-align: center;
-            }
+            .cta-img-box { min-height: 40rem; order: -1; }
+            .cta-text-box { text-align: center; }
+            .cta-buttons  { justify-content: center; flex-wrap: wrap; }
 
-            .cta-img-box {
-                min-height: 40rem;
-                order: -1; /* Image above text on stack */
-            }
-
-            .cta-text-box {
-                text-align: center;
-            }
-
-            .cta-buttons {
-                justify-content: center;
-                flex-wrap: wrap;
-            }
-
-            .footer-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .logos {
-                gap: 3.2rem;
-            }
+            .footer-content { grid-template-columns: 1fr; text-align: center; }
+            .logos { gap: 3.2rem; }
         }
 
-        /* Below 944px (59em) - Tablets */
         @media (max-width: 59em) {
-            html {
-                font-size: 56.25%;
-            }
+            html { font-size: 56.25%; }
 
-            .header {
-                padding: 0 2.4rem;
-            }
+            .header { padding: 0 2.4rem; }
 
             .main-nav {
                 display: none;
@@ -690,193 +577,89 @@
                 background-color: var(--color-light-background);
                 padding: 2.4rem;
                 z-index: 99;
+                box-shadow: 0 8px 24px rgba(57, 59, 143, 0.12);
             }
 
-            .main-nav.active {
-                display: block;
-            }
+            .main-nav.active { display: block; }
 
-            .main-nav-list {
-                flex-direction: column;
-                gap: 2.4rem;
-                align-items: center;
-            }
+            .main-nav-list { flex-direction: column; gap: 2.4rem; align-items: center; }
 
-            .btn-mobile-nav {
-                display: block;
-            }
+            .btn-mobile-nav { display: block; }
 
-            .btn-mobile-nav[aria-expanded="true"] .icon-mobile-nav[name="menu-outline"] {
-                display: none;
-            }
+            .btn-mobile-nav[aria-expanded="true"] .icon-mobile-nav[name="menu-outline"] { display: none; }
+            .btn-mobile-nav[aria-expanded="true"] .icon-mobile-nav[name="close-outline"] { display: block; }
 
-            .btn-mobile-nav[aria-expanded="true"] .icon-mobile-nav[name="close-outline"] {
-                display: block;
-            }
+            .heading-primary   { font-size: 4rem; }
+            .heading-secondary { font-size: 3.2rem; }
+            .hero-description  { font-size: 1.8rem; }
 
-            .heading-primary {
-                font-size: 4rem;
-            }
+            .grid--3-cols { grid-template-columns: repeat(2, 1fr); }
 
-            .heading-secondary {
-                font-size: 3.2rem;
-            }
+            .benefit-icon  { width: 7rem; height: 7rem; }
+            .benefit-title { font-size: 2rem; }
+            .benefit-text  { font-size: 1.5rem; }
 
-            .hero-description {
-                font-size: 1.8rem;
-            }
-
-            .grid--3-cols {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .benefit-icon {
-                width: 7rem;
-                height: 7rem;
-            }
-
-            .benefit-title {
-                font-size: 2rem;
-            }
-
-            .benefit-text {
-                font-size: 1.5rem;
-            }
-
-            .cta .heading-secondary {
-                font-size: 3rem;
-            }
-
-            .cta-text {
-                font-size: 1.6rem;
-            }
-
-            .cta-buttons {
-                flex-direction: column;
-                gap: 1.6rem;
-            }
+            .cta .heading-secondary { font-size: 3rem; }
+            .cta-text { font-size: 1.6rem; }
+            .cta-buttons { flex-direction: column; gap: 1.6rem; }
 
             .btn--whatsapp,
-            .btn--youtube {
-                font-size: 2rem;
-                padding: 1.6rem 3rem;
-            }
+            .btn--youtube { font-size: 1.4rem; padding: 1.6rem 3rem; }
 
             .section-hero,
             .section-about,
             .section-benefits,
-            .section-cta {
-                padding: 6.4rem 0;
-            }
+            .section-cta { padding: 6.4rem 0; }
         }
 
-        /* Below 544px (34em) - Mobile */
         @media (max-width: 34em) {
-            html {
-                font-size: 50%;
-            }
+            html { font-size: 50%; }
 
-            .container {
-                padding: 0 1.6rem;
-            }
+            .container { padding: 0 1.6rem; }
+            .grid { row-gap: 4.8rem; column-gap: 3.2rem; }
+            .grid--3-cols { grid-template-columns: 1fr; }
 
-            .grid {
-                row-gap: 4.8rem;
-                column-gap: 3.2rem;
-            }
-
-            .grid--3-cols {
-                grid-template-columns: 1fr;
-            }
-
-            .heading-primary {
-                font-size: 3.6rem;
-            }
-
-            .heading-secondary {
-                font-size: 2.8rem;
-            }
-
-            .hero-description {
-                font-size: 1.6rem;
-            }
+            .heading-primary   { font-size: 3.6rem; }
+            .heading-secondary { font-size: 2.8rem; }
+            .hero-description  { font-size: 1.6rem; }
 
             .btn,
             .btn:link,
-            .btn:visited {
-                font-size: 1.6rem;
-                padding: 1.2rem 2.4rem;
-            }
+            .btn:visited { font-size: 1.5rem; padding: 1.2rem 2.4rem; }
 
             .btn--whatsapp,
-            .btn--youtube {
-                font-size: 1.8rem;
-                padding: 1.4rem 2.8rem;
-            }
+            .btn--youtube { font-size: 1.3rem; padding: 1.4rem 2.4rem; }
 
             .section-hero,
             .section-about,
             .section-benefits,
-            .section-cta {
-                padding: 4.8rem 0;
-            }
+            .section-cta { padding: 4.8rem 0; }
 
-            .logos {
-                gap: 2rem;
-            }
+            .logos { gap: 2rem; }
+            .logos img { height: 2.8rem; }
 
-            .logos img {
-                height: 2.8rem;
-            }
+            .benefit-card  { padding: 2.4rem; }
+            .benefit-icon  { width: 6rem; height: 6rem; }
+            .benefit-title { font-size: 1.8rem; }
+            .benefit-text  { font-size: 1.4rem; }
 
-            .social-icons-container {
-                gap: 1.2rem;
-            }
+            .cta-text-box { padding: 3.2rem; }
+            .cta-img-box  { min-height: 30rem; }
 
-            .benefit-card {
-                padding: 2.4rem;
-            }
-
-            .benefit-icon {
-                width: 6rem;
-                height: 6rem;
-            }
-
-            .benefit-title {
-                font-size: 1.8rem;
-            }
-
-            .benefit-text {
-                font-size: 1.4rem;
-            }
-
-            .cta-text-box {
-                padding: 3.2rem;
-            }
-
-            .cta-img-box {
-                min-height: 30rem;
-            }
-
-            .footer {
-                padding: 3.2rem 0;
-            }
-
-            .footer-logo img {
-                height: 3.2rem;
-            }
+            .footer { padding: 3.2rem 0; }
+            .footer-logo img { height: 3.2rem; }
         }
     </style>
 </head>
 <body>
     <header class="header">
         <a href="{{ route('landing') }}">
-            <img class="logo" alt="Academic Funding Gateway logo" src="{{ asset('assets/img/logo-dark-transparent.png') }}" />
+            <img class="logo" alt="Academic Funding Gateway logo" src="{{ asset('assets/img/lOGO-01.png') }}" />
         </a>
         <nav class="main-nav">
             <ul class="main-nav-list">
                 <li><a class="main-nav-link" href="#about">About Us</a></li>
-                <li><a class="main-nav-link" href="{{ route('donation') }}">Partner with us</a></li>           
+                <li><a class="main-nav-link" href="{{ route('donation') }}">Partner with us</a></li>
                 <li><a class="main-nav-link nav-cta" href="{{ route('student.register') }}">Complete Registration</a></li>
             </ul>
         </nav>
@@ -912,7 +695,7 @@
 
         <section class="section-about" id="about">
             <div class="container center-text">
-                <span class="subheading" style="margin-bottom: 30px;">About Us</span>                
+                <span class="subheading" style="margin-bottom: 30px;">About Us</span>
             </div>
             <div class="container">
                 <div class="about-grid">
@@ -937,8 +720,8 @@
             <div class="container center-text">
                 <span class="subheading">Your Journey Starts Here</span>
                 <h2 class="heading-secondary">Why Join Academic Funding?</h2>
-                <p style="font-size: 1.8rem; margin-bottom: 4.8rem; color: #666;">
-                    We don’t just offer benefits—we build futures. Here’s how we empower you:
+                <p style="font-size: 1.8rem; margin-bottom: 4.8rem; color: var(--color-body);">
+                    We don't just offer benefits—we build futures. Here's how we empower you:
                 </p>
             </div>
             <div class="container grid grid--3-cols">
@@ -946,13 +729,13 @@
                     <div class="benefit-icon" style="background: #e3f2fd;">
                         <ion-icon name="school-outline" style="font-size: 4rem; color: #1976d2;"></ion-icon>
                     </div>
-                    <h3 class="benefit-title">Learn & Grow</h3>
+                    <h3 class="benefit-title">Learn &amp; Grow</h3>
                     <p class="benefit-text">
                         Access full entrepreneurship training and workplace workshops to sharpen your skills and launch your career.
                     </p>
                 </div>
                 <div class="benefit-card">
-                    <div class="benefit-icon" style="background: #f3e5f5;">
+                    <div class="benefit-icon" style="background: #ede7f6;">
                         <ion-icon name="cash-outline" style="font-size: 4rem; color: #7b1fa2;"></ion-icon>
                     </div>
                     <h3 class="benefit-title">Fund Your Dreams</h3>
@@ -961,7 +744,7 @@
                     </p>
                 </div>
                 <div class="benefit-card">
-                    <div class="benefit-icon" style="background: #e8f5e8;">
+                    <div class="benefit-icon" style="background: #e8f5e9;">
                         <ion-icon name="globe-outline" style="font-size: 4rem; color: #2e7d32;"></ion-icon>
                     </div>
                     <h3 class="benefit-title">Go Global</h3>
@@ -982,11 +765,9 @@
                         </p>
                         <div class="cta-buttons">
                             <a href="https://chat.whatsapp.com/YourWhatsAppGroupLinkHere" target="_blank" class="btn btn--whatsapp">
-                                
                                 JOIN OUR COMMUNITY FOR DAILY JOB OFFERS
                             </a>
                             <a href="https://www.youtube.com/@academicfunding" target="_blank" class="btn btn--youtube">
-                               
                                 ACCESS OTINIC BUSINESS SCHOOL FOR FREE
                             </a>
                         </div>
@@ -1004,21 +785,19 @@
             <div class="footer-content" style="padding: 4rem 0;">
                 <div>
                     <a href="#" class="footer-logo">
-                        <img class="logo" alt="Academic Funding Gateway logo" src="{{ asset('assets/img/logo-light-transparent.png') }}" />
+                        <img class="logo" alt="Academic Funding Gateway logo" src="{{ asset('assets/img/logo_dark.png') }}" />
                     </a>
-                    <p style="font-size: 1.4rem; margin-top: 1.6rem; color: #ccc;">
+                    <p style="font-size: 1.4rem; margin-top: 1.6rem; color: var(--color-muted);">
                         Besides Transformer Orange farm Byhazin Accross, Kubwa Abuja<br>
-                        <a class="footer-link" href="tel:09134448135" style="color: #aaa;">09134448135</a> |
-                        <a class="footer-link" href="mailto:info@academicfunding.org" style="color: #aaa;">info@academicfunding.org</a>
+                        <a class="footer-link" href="tel:09134448135" style="color: var(--color-muted);">09134448135</a> |
+                        <a class="footer-link" href="mailto:info@academicfunding.org" style="color: var(--color-muted);">info@academicfunding.org</a>
                     </p>
                 </div>
                 <div style="text-align: right;">
-                    <p style="font-size: 1.4rem; color: #ccc;">&copy; 2026 Academic Funding Gateway. All Rights Reserved.</p>
+                    <p style="font-size: 1.4rem; color: var(--color-muted);">&copy; 2026 Academic Funding Gateway. All Rights Reserved.</p>
                 </div>
             </div>
-            <div class="copyright">
-               
-            </div>
+            <div class="copyright"></div>
         </div>
     </footer>
 
@@ -1056,19 +835,16 @@
         window.addEventListener('scroll', animateOnScroll);
         window.addEventListener('load', animateOnScroll);
 
-        // Initial state
         document.querySelectorAll('.benefit-card, .cta').forEach(el => {
             el.style.transition = 'all 0.6s ease';
         });
 
-        // Add staggered animation for CTA buttons
         document.addEventListener('DOMContentLoaded', function() {
             const whatsappBtn = document.querySelector('.btn--whatsapp');
-            const youtubeBtn = document.querySelector('.btn--youtube');
-            
+            const youtubeBtn  = document.querySelector('.btn--youtube');
             if (whatsappBtn && youtubeBtn) {
                 whatsappBtn.style.animationDelay = '0.2s';
-                youtubeBtn.style.animationDelay = '0.4s';
+                youtubeBtn.style.animationDelay  = '0.4s';
             }
         });
     </script>
