@@ -1,852 +1,570 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="description" content="Academic Funding Gateway empowers Nigerian students with grants, training, and mentorship to become entrepreneurs and leaders." />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="{{ asset('assets/img/logo-favicon.png') }}" />
-    <link rel="apple-touch-icon" href="{{ asset('img/apple-touch-icon.png') }}" />
-    <link rel="manifest" href="{{ asset('manifest.webmanifest') }}" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
-    <script type="module" src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.js"></script>
-    <script defer src="https://unpkg.com/smoothscroll-polyfill@0.4.4/dist/smoothscroll.min.js"></script>
-    <title>Academic Funding Gateway &mdash; From Student to CEO</title>
-    <style>
-        :root {
-            /* Logo-derived palette */
-            --color-primary:       #393B8F;   /* logo blue */
-            --color-primary-light: #4E51B0;   /* lighter shade */
-            --color-primary-dark:  #272869;   /* darker shade */
-            --color-secondary:     #178CA4;   /* teal accent */
-            --color-secondary-light: #1DACCB;
+@extends('layouts.app')
 
-            /* Neutrals from logo's #D4D4D4 */
-            --color-light-background: #E8E8F0; /* blue-tinted light gray */
-            --color-surface:    #F3F3F8;
-            --color-muted:      #D4D4D4;       /* logo gray */
-            --color-dark:       #1A1B3A;       /* deep navy-dark */
-            --color-body:       #3D3F6B;       /* mid blue-gray body text */
-        }
+@section('title', 'Academic Funding Gateway')
+@section('meta_description', 'Curated remote work opportunities, scholarships, grants and career guides for Nigerian students and professionals.')
 
-        * {
-            padding: 0;
-            margin: 0;
-            box-sizing: border-box;
-        }
+@section('content')
 
-        html {
-            font-size: 62.5%;
-            overflow-x: hidden;
-            scroll-behavior: smooth;
-        }
+{{-- ── HERO ── --}}
+<section class="hero" aria-label="Hero">
 
-        body {
-            font-family: "DM Sans", sans-serif;
-            line-height: 1.6;
-            font-weight: 400;
-            color: var(--color-dark);
-            overflow-x: hidden;
-            background-color: var(--color-light-background);
-        }
+    {{-- LEFT — IMAGE SLIDER --}}
+    <div class="hero__left" id="heroSlider" aria-label="Opportunity highlights slideshow">
 
-        h1, h2, h3, h4, h5, h6 {
-            font-family: "Syne", sans-serif;
-        }
-
-        .container {
-            max-width: 120rem;
-            padding: 0 3.2rem;
-            margin: 0 auto;
-        }
-
-        .grid {
-            display: grid;
-            column-gap: 6.4rem;
-            row-gap: 6.4rem;
-        }
-
-        .grid--2-cols  { grid-template-columns: repeat(2, 1fr); }
-        .grid--3-cols  { grid-template-columns: repeat(3, 1fr); }
-        .grid--center-v { align-items: center; }
-
-        .heading-primary,
-        .heading-secondary,
-        .heading-tertiary {
-            font-family: "Syne", sans-serif;
-            font-weight: 700;
-            color: var(--color-dark);
-            letter-spacing: -0.5px;
-        }
-
-        .heading-primary   { font-size: 5.2rem; line-height: 1.05; margin-bottom: 3.2rem; }
-        .heading-secondary { font-size: 4.4rem; line-height: 1.2;  margin-bottom: 4.8rem; }
-        .heading-tertiary  { font-size: 3rem;   line-height: 1.2;  margin-bottom: 3.2rem; }
-
-        .subheading {
-            display: block;
-            font-family: "Syne", sans-serif;
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--color-secondary);
-            text-transform: uppercase;
-            margin-bottom: 1.6rem;
-            letter-spacing: 0.18em;
-        }
-
-        .btn,
-        .btn:link,
-        .btn:visited {
-            display: inline-block;
-            text-decoration: none;
-            font-family: "Syne", sans-serif;
-            font-size: 1.6rem;
-            font-weight: 700;
-            letter-spacing: 0.04em;
-            padding: 1.4rem 2.8rem;
-            border-radius: 9px;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .btn--full:link,
-        .btn--full:visited {
-            background-color: var(--color-primary);
-            color: #fff;
-        }
-
-        .btn--full:hover,
-        .btn--full:active {
-            background-color: var(--color-primary-dark);
-        }
-
-        .btn--outline:link,
-        .btn--outline:visited {
-            background-color: transparent;
-            color: #fff;
-            border: 1.5px solid rgba(255,255,255,0.55);
-        }
-
-        .btn--outline:hover,
-        .btn--outline:active {
-            background-color: rgba(255,255,255,0.1);
-            border-color: #fff;
-        }
-
-        .btn--whatsapp {
-            border: 1.5px solid rgba(255,255,255,0.6);
-            color: #fff;
-            font-size: 1.5rem;
-            padding: 1.8rem 3.5rem;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(57, 59, 143, 0.35);
-            animation: pulse 2s infinite, float 3s ease-in-out infinite;
-        }
-
-        .btn--whatsapp:hover {
-            box-shadow: 0 6px 20px rgba(57, 59, 143, 0.55);
-            border-color: #fff;
-            transform: translateY(-2px);
-        }
-
-        .btn--whatsapp:active { transform: translateY(1px); }
-
-        .btn--youtube {
-            border: 1.5px solid rgba(255,255,255,0.6);
-            color: #fff;
-            font-size: 1.5rem;
-            padding: 1.8rem 3.5rem;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(23, 140, 164, 0.35);
-            animation: pulse-youtube 2s infinite;
-        }
-
-        .btn--youtube:hover {
-            border-color: #fff;
-            box-shadow: 0 6px 20px rgba(23, 140, 164, 0.55);
-            transform: translateY(-2px);
-        }
-
-        .btn--youtube:active { transform: translateY(1px); }
-
-        @keyframes pulse {
-            0%   { box-shadow: 0 4px 15px rgba(57, 59, 143, 0.35); }
-            50%  { box-shadow: 0 6px 20px rgba(57, 59, 143, 0.55); }
-            100% { box-shadow: 0 4px 15px rgba(57, 59, 143, 0.35); }
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50%       { transform: translateY(-10px); }
-        }
-
-        @keyframes pulse-youtube {
-            0%   { box-shadow: 0 4px 15px rgba(23, 140, 164, 0.35); }
-            50%  { box-shadow: 0 6px 20px rgba(23, 140, 164, 0.55); }
-            100% { box-shadow: 0 4px 15px rgba(23, 140, 164, 0.35); }
-        }
-
-        .center-text { text-align: center; }
-        strong { font-weight: 600; }
-
-        /* ── HEADER ── */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: var(--color-light-background);
-            height: 9.6rem;
-            padding: 0 4.8rem;
-            position: relative;
-            z-index: 100;
-        }
-
-        .logo { height: clamp(4.5rem, 6vw, 6rem); }
-
-        .main-nav-list {
-            list-style: none;
-            display: flex;
-            align-items: center;
-            gap: 3.2rem;
-        }
-
-        .main-nav-link:link,
-        .main-nav-link:visited {
-            display: inline-block;
-            text-decoration: none;
-            color: var(--color-dark);
-            font-family: "Syne", sans-serif;
-            font-weight: 600;
-            font-size: 1.45rem;
-            letter-spacing: 0.07em;
-            text-transform: uppercase;
-            transition: all 0.3s;
-        }
-
-        .main-nav-link:hover,
-        .main-nav-link:active { color: var(--color-secondary); }
-
-        .main-nav-link.nav-cta:link,
-        .main-nav-link.nav-cta:visited {
-            padding: 1rem 2rem;
-            border-radius: 9px;
-            color: #fff;
-            background-color: var(--color-primary);
-        }
-
-        .main-nav-link.nav-cta:hover,
-        .main-nav-link.nav-cta:active { background-color: var(--color-primary-dark); }
-
-        .btn-mobile-nav {
-            border: none;
-            background: none;
-            cursor: pointer;
-            display: none;
-        }
-
-        .icon-mobile-nav {
-            height: 4rem;
-            width: 4rem;
-            color: var(--color-dark);
-        }
-
-        .icon-mobile-nav[name="close-outline"] { display: none; }
-
-        .sticky .header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            height: 8rem;
-            padding: 0 2.4rem;
-            background-color: rgba(232, 232, 240, 0.97);
-            box-shadow: 0 1.2rem 3.2rem rgba(57, 59, 143, 0.08);
-            z-index: 999;
-        }
-
-        .sticky .section-hero { margin-top: 9.6rem; }
-
-        /* ── HERO ── */
-        .section-hero {
-            background: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop') no-repeat center center/cover;
-            position: relative;
-            padding: 6.4rem 0;
-            animation: fadeIn 1s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to   { opacity: 1; }
-        }
-
-        .hero-overlay {
-            background: linear-gradient(
-                155deg,
-                rgba(26, 27, 58, 0.90) 0%,
-                rgba(57, 59, 143, 0.78) 55%,
-                rgba(23, 140, 164, 0.45) 100%
-            );
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-        }
-
-        .hero {
-            max-width: 130rem;
-            margin: 0 auto;
-            padding: 0 3.2rem;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 6.4rem;
-            align-items: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-description {
-            font-size: 1.9rem;
-            line-height: 1.6;
-            margin-bottom: 3.2rem;
-            color: var(--color-muted);
-        }
-
-        .hero-img {
-            width: 100%;
-            height: auto;
-            border-radius: 12px;
-            transform: scale(1.02);
-            transition: transform 0.5s;
-        }
-
-        .hero-img:hover { transform: scale(1.05); }
-
-        /* ── FEATURED ── */
-        .section-featured { padding: 3.2rem 0; }
-
-        .heading-featured-in {
-            font-size: 1.4rem;
-            text-transform: uppercase;
-            letter-spacing: 0.75px;
-            font-weight: 500;
-            text-align: center;
-            margin-bottom: 2.4rem;
-            color: #888;
-        }
-
-        .logos {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 4rem;
-            flex-wrap: wrap;
-        }
-
-        .logos img {
-            height: 3.2rem;
-            filter: brightness(0);
-            opacity: 50%;
-            transition: all 0.3s;
-        }
-
-        .logos img:hover { opacity: 100%; filter: brightness(1); }
-
-        /* ── SECTION BGs ── */
-        .section-about    { padding: 8rem 0;   background-color: #fff; }
-        .section-benefits { padding: 9.6rem 0; background-color: var(--color-light-background); }
-        .section-cta      { padding: 6.4rem 0; background-color: #fff; }
-
-        /* ── ABOUT ── */
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 6.4rem;
-            align-items: stretch;
-        }
-
-        .about-text-box {
-            font-size: 1.7rem;
-            line-height: 1.8;
-            color: var(--color-body);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .about-img-container {
-            display: flex;
-            align-items: center;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 8px 32px rgba(57, 59, 143, 0.12);
-        }
-
-        .about-img {
-            width: 100%;
-            height: auto;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-
-        .about-img:hover { transform: scale(1.05); }
-
-        /* ── BENEFIT CARDS ── */
-        .benefit-card {
-            background: white;
-            padding: 3.2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 16px rgba(57, 59, 143, 0.08);
-            transition: all 0.3s ease;
-            text-align: center;
-            opacity: 0;
-            transform: translateY(20px);
-        }
-
-        .benefit-card.visible { opacity: 1; transform: translateY(0); }
-
-        .benefit-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 32px rgba(57, 59, 143, 0.15);
-        }
-
-        .benefit-icon {
-            width: 8rem;
-            height: 8rem;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 2rem;
-        }
-
-        .benefit-title {
-            font-family: "Syne", sans-serif;
-            font-size: 2.2rem;
-            font-weight: 700;
-            margin-bottom: 1.6rem;
-            color: var(--color-dark);
-        }
-
-        .benefit-text {
-            font-size: 1.6rem;
-            line-height: 1.6;
-            color: var(--color-body);
-        }
-
-        /* ── CTA ── */
-        .cta {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            box-shadow: 0 2.4rem 4.8rem rgba(57, 59, 143, 0.2);
-            border-radius: 11px;
-            background-image: linear-gradient(
-                to right bottom,
-                var(--color-primary-dark),
-                var(--color-primary),
-                var(--color-secondary)
-            );
-            overflow: hidden;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.5s;
-        }
-
-        .cta.visible { opacity: 1; transform: translateY(0); }
-
-        .cta-text-box {
-            padding: 4.8rem;
-            color: #fff;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .cta .heading-secondary {
-            color: inherit;
-            margin-bottom: 2rem;
-            font-size: 3.3rem;
-        }
-
-        .cta-text {
-            font-size: 1.7rem;
-            line-height: 1.6;
-            margin-bottom: 3.2rem;
-            color: var(--color-muted);
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 2.4rem;
-            align-items: center;
-        }
-
-        .cta-img-box {
-            min-height: 30rem;
-            background-image: linear-gradient(
-                to right bottom,
-                rgba(57, 59, 143, 0.4),
-                rgba(23, 140, 164, 0.3)
-            ),
-            url("https://images.unsplash.com/photo-1522204523234-8729aa6e993e?q=80&w=2070&auto=format&fit=crop");
-            background-size: cover;
-            background-position: center;
-        }
-
-        .cta-img-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.9;
-            display: block;
-        }
-
-        /* ── FOOTER ── */
-        .footer {
-            padding: 4.8rem 0;
-            border-top: 1px solid rgba(57, 59, 143, 0.15);
-            background-color: var(--color-dark);
-            color: #fff;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .footer-logo img { height: 4rem; }
-
-        .contacts {
-            font-style: normal;
-            font-size: 1.5rem;
-            line-height: 1.6;
-        }
-
-        .contacts a {
-            color: var(--color-muted);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .contacts a:hover { color: var(--color-secondary-light); }
-
-        .copyright {
-            font-size: 1.4rem;
-            color: #999;
-            text-align: center;
-            margin-top: 2.4rem;
-            padding-top: 2.4rem;
-            border-top: 1px solid rgba(255,255,255,0.08);
-        }
-
-        /* ── RESPONSIVE ── */
-        @media (max-width: 75em) {
-            .container { max-width: 114rem; padding: 0 2.4rem; }
-
-            .grid--2-cols,
-            .about-grid,
-            .cta { grid-template-columns: 1fr; row-gap: 4.8rem; }
-
-            .hero { grid-template-columns: 1fr; text-align: center; gap: 3.2rem; }
-            .hero-text-box { text-align: center; }
-
-            .cta-img-box { min-height: 40rem; order: -1; }
-            .cta-text-box { text-align: center; }
-            .cta-buttons  { justify-content: center; flex-wrap: wrap; }
-
-            .footer-content { grid-template-columns: 1fr; text-align: center; }
-            .logos { gap: 3.2rem; }
-        }
-
-        @media (max-width: 59em) {
-            html { font-size: 56.25%; }
-
-            .header { padding: 0 2.4rem; }
-
-            .main-nav {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: var(--color-light-background);
-                padding: 2.4rem;
-                z-index: 99;
-                box-shadow: 0 8px 24px rgba(57, 59, 143, 0.12);
-            }
-
-            .main-nav.active { display: block; }
-
-            .main-nav-list { flex-direction: column; gap: 2.4rem; align-items: center; }
-
-            .btn-mobile-nav { display: block; }
-
-            .btn-mobile-nav[aria-expanded="true"] .icon-mobile-nav[name="menu-outline"] { display: none; }
-            .btn-mobile-nav[aria-expanded="true"] .icon-mobile-nav[name="close-outline"] { display: block; }
-
-            .heading-primary   { font-size: 4rem; }
-            .heading-secondary { font-size: 3.2rem; }
-            .hero-description  { font-size: 1.8rem; }
-
-            .grid--3-cols { grid-template-columns: repeat(2, 1fr); }
-
-            .benefit-icon  { width: 7rem; height: 7rem; }
-            .benefit-title { font-size: 2rem; }
-            .benefit-text  { font-size: 1.5rem; }
-
-            .cta .heading-secondary { font-size: 3rem; }
-            .cta-text { font-size: 1.6rem; }
-            .cta-buttons { flex-direction: column; gap: 1.6rem; }
-
-            .btn--whatsapp,
-            .btn--youtube { font-size: 1.4rem; padding: 1.6rem 3rem; }
-
-            .section-hero,
-            .section-about,
-            .section-benefits,
-            .section-cta { padding: 6.4rem 0; }
-        }
-
-        @media (max-width: 34em) {
-            html { font-size: 50%; }
-
-            .container { padding: 0 1.6rem; }
-            .grid { row-gap: 4.8rem; column-gap: 3.2rem; }
-            .grid--3-cols { grid-template-columns: 1fr; }
-
-            .heading-primary   { font-size: 3.6rem; }
-            .heading-secondary { font-size: 2.8rem; }
-            .hero-description  { font-size: 1.6rem; }
-
-            .btn,
-            .btn:link,
-            .btn:visited { font-size: 1.5rem; padding: 1.2rem 2.4rem; }
-
-            .btn--whatsapp,
-            .btn--youtube { font-size: 1.3rem; padding: 1.4rem 2.4rem; }
-
-            .section-hero,
-            .section-about,
-            .section-benefits,
-            .section-cta { padding: 4.8rem 0; }
-
-            .logos { gap: 2rem; }
-            .logos img { height: 2.8rem; }
-
-            .benefit-card  { padding: 2.4rem; }
-            .benefit-icon  { width: 6rem; height: 6rem; }
-            .benefit-title { font-size: 1.8rem; }
-            .benefit-text  { font-size: 1.4rem; }
-
-            .cta-text-box { padding: 3.2rem; }
-            .cta-img-box  { min-height: 30rem; }
-
-            .footer { padding: 3.2rem 0; }
-            .footer-logo img { height: 3.2rem; }
-        }
-    </style>
-</head>
-<body>
-    <header class="header">
-        <a href="{{ route('landing') }}">
-            <img class="logo" alt="Academic Funding Gateway logo" src="{{ asset('assets/img/lOGO-01.png') }}" />
-        </a>
-        <nav class="main-nav">
-            <ul class="main-nav-list">
-                <li><a class="main-nav-link" href="#about">About Us</a></li>
-                <li><a class="main-nav-link" href="{{ route('donation') }}">Partner with us</a></li>
-                <li><a class="main-nav-link nav-cta" href="{{ route('student.register') }}">Complete Registration</a></li>
-            </ul>
-        </nav>
-        <button class="btn-mobile-nav" aria-expanded="false">
-            <ion-icon class="icon-mobile-nav" name="menu-outline"></ion-icon>
-            <ion-icon class="icon-mobile-nav" name="close-outline"></ion-icon>
-        </button>
-    </header>
-
-    <main>
-        <section class="section-hero">
-            <div class="hero-overlay"></div>
-            <div class="hero">
-                <div class="hero-text-box">
-                    <h1 class="heading-primary" style="color: #ffffff;">From Student to CEO – Empowering the Next Generation of Leaders</h1>
-                    <p class="hero-description">
-                        We provide Nigerian students with grants, training, mentorship, and resources to transition from the classroom to the boardroom.
-                    </p>
-                    <a href="{{ route('student.register') }}" class="btn btn--full margin-right-sm">Complete Registration</a>
-                    <a href="#about" class="btn btn--outline">Learn More &darr;</a>
-                </div>
+        {{-- Background slides --}}
+        <div class="hero__slides" aria-hidden="true">
+            <div class="hero__slide active"
+                 style="background-image: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2071&auto=format&fit=crop')">
             </div>
-        </section>
-
-        <section class="section-featured">
-            <div class="container">
-                <h2 class="heading-featured-in"></h2>
-                <div class="logos">
-                    <!-- Logos can be added here later -->
-                </div>
+            <div class="hero__slide"
+                 style="background-image: url('https://images.unsplash.com/photo-1531545514256-b1400bc00f31?q=80&w=1974&auto=format&fit=crop')">
             </div>
-        </section>
-
-        <section class="section-about" id="about">
-            <div class="container center-text">
-                <span class="subheading" style="margin-bottom: 30px;">About Us</span>
+            <div class="hero__slide"
+                 style="background-image: url('https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=2070&auto=format&fit=crop')">
             </div>
-            <div class="container">
-                <div class="about-grid">
-                    <div class="about-text-box">
-                        <h2 class="heading-secondary">Empowering Students to Become Entrepreneurs</h2>
-                        <p class="about-description">
-                            The Student-to-CEO Initiative, powered by the Academic Funding Gateway Network, is committed to bridging the gap between education and entrepreneurship. We equip Nigerian students with the financial support, incubation, and learning tools they need to start and grow businesses—while still in school.
-                        </p>
-                    </div>
-                    <div class="about-img-container">
-                        <img
-                            src="{{ asset('assets/img/ac_funding.jpg') }}"
-                            class="about-img"
-                            alt="Students working on business ideas"
-                        />
-                    </div>
-                </div>
+            <div class="hero__slide"
+                 style="background-image: url('https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?q=80&w=1974&auto=format&fit=crop')">
             </div>
-        </section>
-
-        <section class="section-benefits" id="benefits">
-            <div class="container center-text">
-                <span class="subheading">Your Journey Starts Here</span>
-                <h2 class="heading-secondary">Why Join Academic Funding?</h2>
-                <p style="font-size: 1.8rem; margin-bottom: 4.8rem; color: var(--color-body);">
-                    We don't just offer benefits—we build futures. Here's how we empower you:
-                </p>
-            </div>
-            <div class="container grid grid--3-cols">
-                <div class="benefit-card">
-                    <div class="benefit-icon" style="background: #e3f2fd;">
-                        <ion-icon name="school-outline" style="font-size: 4rem; color: #1976d2;"></ion-icon>
-                    </div>
-                    <h3 class="benefit-title">Learn &amp; Grow</h3>
-                    <p class="benefit-text">
-                        Access full entrepreneurship training and workplace workshops to sharpen your skills and launch your career.
-                    </p>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon" style="background: #ede7f6;">
-                        <ion-icon name="cash-outline" style="font-size: 4rem; color: #7b1fa2;"></ion-icon>
-                    </div>
-                    <h3 class="benefit-title">Fund Your Dreams</h3>
-                    <p class="benefit-text">
-                        Get grants, daily job alerts, and direct support for applications—so you never miss an opportunity.
-                    </p>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon" style="background: #e8f5e9;">
-                        <ion-icon name="globe-outline" style="font-size: 4rem; color: #2e7d32;"></ion-icon>
-                    </div>
-                    <h3 class="benefit-title">Go Global</h3>
-                    <p class="benefit-text">
-                        Train with global institutions, earn recognized certificates, and expand your network worldwide.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <section class="section-cta" id="cta">
-            <div class="container">
-                <div class="cta">
-                    <div class="cta-text-box">
-                        <h2 class="heading-secondary">Ready to Launch?</h2>
-                        <p class="cta-text">
-                            Join thousands of students transforming their futures. Connect with us today!
-                        </p>
-                        <div class="cta-buttons">
-                            <a href="https://chat.whatsapp.com/YourWhatsAppGroupLinkHere" target="_blank" class="btn btn--whatsapp">
-                                JOIN OUR COMMUNITY FOR DAILY JOB OFFERS
-                            </a>
-                            <a href="https://www.youtube.com/@academicfunding" target="_blank" class="btn btn--youtube">
-                                ACCESS OTINIC BUSINESS SCHOOL FOR FREE
-                            </a>
-                        </div>
-                    </div>
-                    <div class="cta-img-box">
-                        <img src="{{ asset('assets/img/cta.jpg') }}" alt="Students collaborating" />
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content" style="padding: 4rem 0;">
-                <div>
-                    <a href="#" class="footer-logo">
-                        <img class="logo" alt="Academic Funding Gateway logo" src="{{ asset('assets/img/logo_dark.png') }}" />
-                    </a>
-                    <p style="font-size: 1.4rem; margin-top: 1.6rem; color: var(--color-muted);">
-                        Besides Transformer Orange farm Byhazin Accross, Kubwa Abuja<br>
-                        <a class="footer-link" href="tel:09134448135" style="color: var(--color-muted);">09134448135</a> |
-                        <a class="footer-link" href="mailto:info@academicfunding.org" style="color: var(--color-muted);">info@academicfunding.org</a>
-                    </p>
-                </div>
-                <div style="text-align: right;">
-                    <p style="font-size: 1.4rem; color: var(--color-muted);">&copy; 2026 Academic Funding Gateway. All Rights Reserved.</p>
-                </div>
-            </div>
-            <div class="copyright"></div>
         </div>
-    </footer>
 
-    <script>
-        // Mobile navigation
-        document.querySelector('.btn-mobile-nav').addEventListener('click', function () {
-            const nav = document.querySelector('.main-nav');
-            const isExpanded = this.getAttribute('aria-expanded') === 'true';
-            this.setAttribute('aria-expanded', !isExpanded);
-            nav.classList.toggle('active');
-        });
+        {{-- Gradient overlay --}}
+        <div class="hero__slide-overlay" aria-hidden="true"></div>
 
-        // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        });
+        {{-- Content layer --}}
+        <div class="hero__left-content">
 
-        // Scroll animations
-        const animateOnScroll = () => {
-            const elements = document.querySelectorAll('.benefit-card, .cta');
-            elements.forEach(el => {
-                const rect = el.getBoundingClientRect();
-                if (rect.top < window.innerHeight * 0.85) {
-                    el.classList.add('visible');
-                }
-            });
-        };
+            {{-- Slide label + progress bar --}}
+            <div class="hero__slide-label">
+                {{-- <span class="hero__slide-label-num" id="slideNum">01 / 04</span> --}}
+                {{-- <span class="hero__slide-label-bar">
+                    <span class="hero__slide-label-progress" id="slideProgress"></span>
+                </span>
+                <span class="hero__slide-label-text" id="slideLabelText">Remote Work</span> --}}
+            </div>
 
-        window.addEventListener('scroll', animateOnScroll);
-        window.addEventListener('load', animateOnScroll);
+            {{-- The card --}}
+            <div class="hero__card reveal">
+                <p class="hero__card-title">Academic Funding Gateway</p>
+                <p class="hero__card-body">
+                    We curate remote work opportunities, scholarships, grants, and practical career
+                    guides so you always know where to look next.
+                </p>
+                {{-- <p class="hero__card-em">
+                    From first search to first paycheck — we point the way.
+                </p> --}}
+                {{-- <a href="{{ route('opportunities.index') }}" class="hero__card-link">
+                    View all opportunities <span aria-hidden="true">→</span>
+                </a> --}}
+            </div>
 
-        document.querySelectorAll('.benefit-card, .cta').forEach(el => {
-            el.style.transition = 'all 0.6s ease';
-        });
+            {{-- Bottom: est + dot controls --}}
+            <div class="hero__bottom">
+                <div class="hero__est">
+                    {{-- <span>Est.</span>
+                    <strong>2024</strong> --}}
+                </div>
 
-        document.addEventListener('DOMContentLoaded', function() {
-            const whatsappBtn = document.querySelector('.btn--whatsapp');
-            const youtubeBtn  = document.querySelector('.btn--youtube');
-            if (whatsappBtn && youtubeBtn) {
-                whatsappBtn.style.animationDelay = '0.2s';
-                youtubeBtn.style.animationDelay  = '0.4s';
-            }
-        });
-    </script>
-</body>
-</html>
+                <div class="hero__dots" role="tablist" aria-label="Slide selector">
+                    <button class="hero__dot active" data-slide="0" role="tab" aria-selected="true" aria-label="Slide 1: Remote Work">
+                        {{-- <span class="hero__dot-label">Remote Work</span> --}}
+                        <span class="hero__dot-pip"></span>
+                    </button>
+                    <button class="hero__dot" data-slide="1" role="tab" aria-selected="false" aria-label="Slide 2: Scholarships">
+                        {{-- <span class="hero__dot-label">Scholarships</span> --}}
+                        <span class="hero__dot-pip"></span>
+                    </button>
+                    <button class="hero__dot" data-slide="2" role="tab" aria-selected="false" aria-label="Slide 3: Career Guides">
+                        {{-- <span class="hero__dot-label">Career Guides</span> --}}
+                        <span class="hero__dot-pip"></span>
+                    </button>
+                    <button class="hero__dot" data-slide="3" role="tab" aria-selected="false" aria-label="Slide 4: Grants">
+                        {{-- <span class="hero__dot-label">Grants</span> --}}
+                        <span class="hero__dot-pip"></span>
+                    </button>
+                </div>
+            </div>
+
+        </div>{{-- /hero__left-content --}}
+    </div>{{-- /hero__left --}}
+
+    <div class="hero__right">
+        <div class="hero__watermark" aria-hidden="true">AFG</div>
+
+        {{-- <p class="hero__corner text-muted reveal">
+            We curate only verified opportunities — from first search<br>
+            to actual application link.
+        </p> --}}
+
+        <div class="hero__headline reveal reveal-delay-1">
+            <h1 class="display-xl">
+                Find remote<br>
+                work &amp;<br>
+                scholarships<br>
+                that pay.
+            </h1>
+        </div>
+
+        <div class="hero__cta-row reveal reveal-delay-2">
+            <a href="{{ route('opportunities.index') }}" class="arrow-btn arrow-btn--yellow" aria-label="Browse opportunities">
+                ↗
+            </a>
+            <a href="{{ route('opportunities.index') }}" class="btn--ghost">Browse opportunities</a>
+        </div>
+    </div>
+
+</section>
+
+{{-- ── STATS ── --}}
+<section class="stats-strip" aria-label="Platform stats">
+    <div class="stat-cell reveal">
+        <p class="stat-cell__num">48+</p>
+        <p class="stat-cell__label">Active opportunities</p>
+        <p class="stat-cell__sub">updated weekly</p>
+    </div>
+    <div class="stat-cell reveal reveal-delay-1">
+        <p class="stat-cell__num">12</p>
+        <p class="stat-cell__label">Guides published</p>
+        <p class="stat-cell__sub">platform walkthroughs & career tips</p>
+    </div>
+    <div class="stat-cell reveal reveal-delay-2">
+        <p class="stat-cell__num">6</p>
+        <p class="stat-cell__label">Closing this week</p>
+        <p class="stat-cell__sub">apply before deadline</p>
+    </div>
+    <div class="stat-cell reveal reveal-delay-3">
+        <p class="stat-cell__num">4</p>
+        <p class="stat-cell__label">Categories</p>
+        <p class="stat-cell__sub">remote work · scholarships · grants · training</p>
+    </div>
+</section>
+
+{{-- ── OPPORTUNITIES ── --}}
+<section class="section" aria-labelledby="opp-heading">
+    <div class="container">
+
+        <div class="section-header">
+            <div class="section-meta">
+                <span class="section-num">01 —</span>
+                <span class="section-tag">Opportunities</span>
+            </div>
+            <div class="section-aside">Featured this week</div>
+        </div>
+
+        <div class="flex-between mb-md" style="flex-wrap:wrap; gap:1.6rem;">
+            <h2 id="opp-heading" class="display-md reveal">Latest opportunities.</h2>
+            <a href="{{ route('opportunities.index') }}" class="btn--ghost-muted reveal">
+                View all 48 <span aria-hidden="true">→</span>
+            </a>
+        </div>
+
+        {{-- Filter bar --}}
+        <div class="filter-bar mb-lg reveal" role="group" aria-label="Filter opportunities">
+            <button class="filter-btn active" data-filter="all" data-target=".js-opp-grid">All</button>
+            <button class="filter-btn" data-filter="remote" data-target=".js-opp-grid">Remote work</button>
+            <button class="filter-btn" data-filter="scholarship" data-target=".js-opp-grid">Scholarships</button>
+            <button class="filter-btn" data-filter="grant" data-target=".js-opp-grid">Grants</button>
+            <button class="filter-btn" data-filter="training" data-target=".js-opp-grid">Training</button>
+        </div>
+
+        <div class="opp-grid js-opp-grid">
+
+            {{-- Card 1 --}}
+            <article class="opp-card" data-category="remote">
+                <div class="opp-card__top">
+                    <span class="badge badge--remote">Remote work</span>
+                    <span class="deadline">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        5 days left
+                    </span>
+                </div>
+                <h3 class="opp-card__title">Customer Support Representative — Fully Remote</h3>
+                <p class="opp-card__desc">Open to Nigerian applicants. Equipment provided. $800/mo. Strong English required.</p>
+                <div class="opp-card__footer">
+                    <span class="opp-card__source">via RemoteOK</span>
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="opp-card__link">
+                        Apply ↗
+                    </a>
+                </div>
+            </article>
+
+            {{-- Card 2 --}}
+            <article class="opp-card" data-category="scholarship">
+                <div class="opp-card__top">
+                    <span class="badge badge--scholar">Scholarship</span>
+                    <span class="deadline deadline--urgent">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        2 days left
+                    </span>
+                </div>
+                <h3 class="opp-card__title">DAAD Scholarships 2026 — Postgraduate, Germany</h3>
+                <p class="opp-card__desc">Full funding for African postgrad students. Covers tuition, monthly stipend, and travel allowance.</p>
+                <div class="opp-card__footer">
+                    <span class="opp-card__source">via DAAD</span>
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="opp-card__link">
+                        Apply ↗
+                    </a>
+                </div>
+            </article>
+
+            {{-- Card 3 --}}
+            <article class="opp-card" data-category="grant">
+                <div class="opp-card__top">
+                    <span class="badge badge--grant">Grant</span>
+                    <span class="deadline">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        14 days left
+                    </span>
+                </div>
+                <h3 class="opp-card__title">Tony Elumelu Foundation Entrepreneurship Grant 2026</h3>
+                <p class="opp-card__desc">$5,000 seed funding plus mentorship for African entrepreneurs. Open to all sectors.</p>
+                <div class="opp-card__footer">
+                    <span class="opp-card__source">via TEF</span>
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="opp-card__link">
+                        Apply ↗
+                    </a>
+                </div>
+            </article>
+
+            {{-- Card 4 --}}
+            <article class="opp-card" data-category="remote">
+                <div class="opp-card__top">
+                    <span class="badge badge--remote">Remote work</span>
+                    <span class="deadline">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        Rolling
+                    </span>
+                </div>
+                <h3 class="opp-card__title">Freelance Content Writer — Tech Niche</h3>
+                <p class="opp-card__desc">Remote-first company hiring writers globally. Flexible hours. Pays via Payoneer.</p>
+                <div class="opp-card__footer">
+                    <span class="opp-card__source">via Contra</span>
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="opp-card__link">
+                        Apply ↗
+                    </a>
+                </div>
+            </article>
+
+            {{-- Card 5 --}}
+            <article class="opp-card" data-category="training">
+                <div class="opp-card__top">
+                    <span class="badge badge--train">Training</span>
+                    <span class="deadline">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        Open enrollment
+                    </span>
+                </div>
+                <h3 class="opp-card__title">Google Career Certificates — Free for Africans</h3>
+                <p class="opp-card__desc">Data analytics, UX design, IT support. Globally recognized. Fully subsidized access for eligible students.</p>
+                <div class="opp-card__footer">
+                    <span class="opp-card__source">via Coursera</span>
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="opp-card__link">
+                        Enroll ↗
+                    </a>
+                </div>
+            </article>
+
+            {{-- Card 6 --}}
+            <article class="opp-card" data-category="scholarship">
+                <div class="opp-card__top">
+                    <span class="badge badge--scholar">Scholarship</span>
+                    <span class="deadline">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        21 days left
+                    </span>
+                </div>
+                <h3 class="opp-card__title">MasterCard Foundation Scholars Program 2026</h3>
+                <p class="opp-card__desc">Undergraduate and graduate scholarships at partner universities. Includes living allowance.</p>
+                <div class="opp-card__footer">
+                    <span class="opp-card__source">via MCF</span>
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="opp-card__link">
+                        Apply ↗
+                    </a>
+                </div>
+            </article>
+
+        </div>{{-- /opp-grid --}}
+
+    </div>
+</section>
+
+{{-- ── HOW IT WORKS ── --}}
+<section class="section" aria-labelledby="how-heading">
+    <div class="container">
+
+        <div class="section-header">
+            <div class="section-meta">
+                <span class="section-num">02 —</span>
+                <span class="section-tag">How it works</span>
+            </div>
+            <div class="section-aside">Simple, every time</div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:start; margin-bottom:6rem;">
+            <h2 id="how-heading" class="display-md reveal">How we<br>find them<br>for you.</h2>
+            <p class="body-lg text-muted reveal reveal-delay-1" style="padding-top:1rem;">
+                We monitor hundreds of sources daily — job boards, scholarship databases, grant portals —
+                and bring only the verified, accessible ones here.
+                Each listing links directly to the original source. No middlemen.
+            </p>
+        </div>
+
+        <nav class="process-list" aria-label="How it works steps">
+
+            <div class="process-row reveal">
+                <span class="process-row__num">01</span>
+                <span class="process-row__title">Discover</span>
+                <span class="process-row__desc">
+                    We scan remote job boards, scholarship portals, and grant databases.
+                    Only opportunities open to Nigerians make the cut.
+                </span>
+                <span class="process-row__arrow" aria-hidden="true">↗</span>
+            </div>
+
+            <div class="process-row reveal reveal-delay-1">
+                <span class="process-row__num">02</span>
+                <span class="process-row__title">Verify</span>
+                <span class="process-row__desc">
+                    We check each listing — deadline, eligibility, payment method — before it goes live.
+                    Expired listings are removed the same day.
+                </span>
+                <span class="process-row__arrow" aria-hidden="true">↗</span>
+            </div>
+
+            <div class="process-row reveal reveal-delay-2">
+                <span class="process-row__num">03</span>
+                <span class="process-row__title">Guide</span>
+                <span class="process-row__desc">
+                    Alongside every platform we feature, we publish a practical how-to guide —
+                    so you show up prepared, not lost.
+                </span>
+                <span class="process-row__arrow" aria-hidden="true">↗</span>
+            </div>
+
+            <div class="process-row reveal reveal-delay-3">
+                <span class="process-row__num">04</span>
+                <span class="process-row__title">Share</span>
+                <span class="process-row__desc">
+                    Every article and listing is built to share. Drop a link in your WhatsApp group —
+                    let others find their next opportunity too.
+                </span>
+                <span class="process-row__arrow" aria-hidden="true">↗</span>
+            </div>
+
+        </nav>
+
+    </div>
+</section>
+
+{{-- ── ARTICLES ── --}}
+<section class="section" aria-labelledby="articles-heading">
+    <div class="container">
+
+        <div class="section-header">
+            <div class="section-meta">
+                <span class="section-num">03 —</span>
+                <span class="section-tag">Guides &amp; Articles</span>
+            </div>
+            <a href="{{ route('articles.index') }}" class="btn--ghost-muted">
+                View all <span aria-hidden="true">→</span>
+            </a>
+        </div>
+
+        <h2 id="articles-heading" class="display-md reveal mb-lg">Read before<br>you apply.</h2>
+
+        <div class="article-grid">
+
+            <article class="article-card reveal">
+                <div class="article-card__img" aria-hidden="true">
+                    <div style="background:rgba(17,17,16,0.06); width:100%; height:100%; display:flex; align-items:center; justify-content:center;">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(17,17,16,0.25)" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                    </div>
+                </div>
+                <p class="article-card__cat">Remote work</p>
+                <h3 class="article-card__title">How to Set Up Your Upwork Profile as a Nigerian and Get Your First Client</h3>
+                <p class="article-card__excerpt">Account creation, identity verification with Nigerian documents, profile optimization, and landing that crucial first contract.</p>
+                <div class="article-card__meta">
+                    <span>6 min read</span>
+                    <span>June 2026</span>
+                </div>
+            </article>
+
+            <article class="article-card reveal reveal-delay-1">
+                <div class="article-card__img" aria-hidden="true">
+                    <div style="background:rgba(17,17,16,0.06); width:100%; height:100%; display:flex; align-items:center; justify-content:center;">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(17,17,16,0.25)" stroke-width="1.5"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+                    </div>
+                </div>
+                <p class="article-card__cat">Scholarships</p>
+                <h3 class="article-card__title">5 Fully Funded Scholarships Open to Nigerians Right Now</h3>
+                <p class="article-card__excerpt">DAAD, MasterCard Foundation, Commonwealth, Chevening, and more — with direct application links and eligibility breakdowns.</p>
+                <div class="article-card__meta">
+                    <span>4 min read</span>
+                    <span>June 2026</span>
+                </div>
+            </article>
+
+            <article class="article-card reveal reveal-delay-2">
+                <div class="article-card__img" aria-hidden="true">
+                    <div style="background:rgba(17,17,16,0.06); width:100%; height:100%; display:flex; align-items:center; justify-content:center;">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(17,17,16,0.25)" stroke-width="1.5"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+                    </div>
+                </div>
+                <p class="article-card__cat">Platforms &amp; tools</p>
+                <h3 class="article-card__title">Payoneer vs Wise: The Best Way to Receive Remote Pay in Nigeria</h3>
+                <p class="article-card__excerpt">Fees, withdrawal limits, setup time, and which banks accept each. A practical comparison for Nigerian freelancers.</p>
+                <div class="article-card__meta">
+                    <span>5 min read</span>
+                    <span>May 2026</span>
+                </div>
+            </article>
+
+        </div>
+    </div>
+</section>
+
+{{-- ── CTA ── --}}
+<section class="cta-section" aria-labelledby="cta-heading">
+    <div class="cta-section__watermark" aria-hidden="true">AFG</div>
+    <div class="container">
+        <div class="cta-section__grid">
+
+            <div>
+                <p class="cta-section__tag">Updated weekly</p>
+                <h2 id="cta-heading" class="display-lg reveal" style="color:var(--dark-ink);">
+                    Ready to find<br>your next<br>opportunity?
+                </h2>
+                <p class="body-lg reveal reveal-delay-1" style="color:rgba(242,241,239,0.6); margin-top:2.4rem; max-width:40rem;">
+                    Join our WhatsApp community and get notified the moment a new remote job
+                    or scholarship is added.
+                </p>
+                <div class="flex-center gap-md mt-md reveal reveal-delay-2">
+                    <a href="https://wa.me/2349134448135" target="_blank" rel="noopener noreferrer"
+                       class="btn btn--dark">
+                        Join WhatsApp community ↗
+                    </a>
+                    <a href="{{ route('opportunities.index') }}" class="btn--ghost" style="color:rgba(242,241,239,0.6);">
+                        Browse now →
+                    </a>
+                </div>
+            </div>
+
+            <div class="cta-section__right reveal reveal-delay-1">
+                <div class="cta-detail-block">
+                    <p class="cta-detail-block__title">What you get</p>
+                    <ul class="cta-detail-block__list">
+                        <li>Verified remote jobs open to Nigerians</li>
+                        <li>Active scholarship &amp; grant listings with deadlines</li>
+                        <li>Step-by-step platform guides</li>
+                        <li>Weekly WhatsApp alerts for new listings</li>
+                    </ul>
+                </div>
+
+                <div class="cta-detail-block">
+                    <p class="cta-detail-block__title">How to stay updated</p>
+                    <ul class="cta-detail-block__list">
+                        <li>Bookmark this site and check weekly</li>
+                        <li>Join our WhatsApp community for alerts</li>
+                        <li>Follow us on YouTube for platform walkthroughs</li>
+                    </ul>
+                </div>
+
+                <form class="js-notify-form" style="display:flex; gap:1rem; flex-wrap:wrap;" novalidate>
+                    <input
+                        type="tel"
+                        placeholder="Your WhatsApp number"
+                        style="flex:1; min-width:18rem; padding:1.2rem 1.6rem; font-family:var(--font); font-size:1.4rem; background:rgba(242,241,239,0.08); border:1px solid rgba(242,241,239,0.2); border-radius:10rem; color:var(--dark-ink); outline:none;"
+                        aria-label="Your WhatsApp number"
+                    />
+                    <button type="submit" class="btn btn--dark">Notify me</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+@endsection
+
+@push('scripts')
+<script>
+(function () {
+    const INTERVAL   = 5000;
+    const slides     = document.querySelectorAll('.hero__slide');
+    const dots       = document.querySelectorAll('.hero__dot');
+    const numEl      = document.getElementById('slideNum');
+    const labelEl    = document.getElementById('slideLabelText');
+    const progressEl = document.getElementById('slideProgress');
+
+    if (!slides.length) return;
+
+    const labels = ['Remote Work', 'Scholarships', 'Career Guides', 'Grants'];
+    let current  = 0;
+    let timer    = null;
+
+    function pad(n) { return String(n + 1).padStart(2, '0'); }
+
+    function goTo(idx, restart) {
+        slides[current].classList.remove('active');
+        slides[current].classList.add('exit');
+        const exiting = current;
+        setTimeout(() => slides[exiting].classList.remove('exit'), 1300);
+
+        dots[current].classList.remove('active');
+        dots[current].setAttribute('aria-selected', 'false');
+
+        current = ((idx % slides.length) + slides.length) % slides.length;
+
+        slides[current].classList.add('active');
+        dots[current].classList.add('active');
+        dots[current].setAttribute('aria-selected', 'true');
+
+        if (numEl)   numEl.textContent   = pad(current) + ' / ' + pad(slides.length - 1);
+        if (labelEl) labelEl.textContent = labels[current] || '';
+
+        // Reset + restart progress bar
+        if (progressEl) {
+            progressEl.style.transition = 'none';
+            progressEl.style.width = '0%';
+            void progressEl.offsetWidth;
+            progressEl.style.transition = 'width ' + INTERVAL + 'ms linear';
+            progressEl.style.width = '100%';
+        }
+
+        if (restart !== false) startAuto();
+    }
+
+    function startAuto() {
+        clearInterval(timer);
+        timer = setInterval(() => goTo(current + 1, false), INTERVAL);
+    }
+
+    dots.forEach((dot, i) => {
+        dot.addEventListener('click', () => { if (i !== current) goTo(i); });
+    });
+
+    const slider = document.getElementById('heroSlider');
+
+    slider?.addEventListener('keydown', e => {
+        if (e.key === 'ArrowDown'  || e.key === 'ArrowRight') { e.preventDefault(); goTo(current + 1); }
+        if (e.key === 'ArrowUp'    || e.key === 'ArrowLeft')  { e.preventDefault(); goTo(current - 1); }
+    });
+
+    slider?.addEventListener('mouseenter', () => clearInterval(timer));
+    slider?.addEventListener('mouseleave', () => startAuto());
+
+    let tx = 0;
+    slider?.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
+    slider?.addEventListener('touchend',   e => {
+        const dx = e.changedTouches[0].clientX - tx;
+        if (Math.abs(dx) > 40) goTo(dx < 0 ? current + 1 : current - 1);
+    }, { passive: true });
+
+    // Boot — trigger first progress bar
+    if (progressEl) {
+        progressEl.style.transition = 'width ' + INTERVAL + 'ms linear';
+        progressEl.style.width = '100%';
+    }
+    startAuto();
+})();
+</script>
+@endpush
