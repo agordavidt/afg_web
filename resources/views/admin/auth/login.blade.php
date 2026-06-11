@@ -245,7 +245,7 @@
         </form>
 
         <div class="back-link">
-            <a href="{{ route('landing') }}">
+            <a href="{{ route('home') }}">
                 <i class="fas fa-arrow-left me-1"></i>Back to Main Site
             </a>
         </div>

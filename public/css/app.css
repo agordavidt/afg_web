@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
 /* ── RESET & BASE ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -15,7 +15,7 @@
     --border:     rgba(17,17,16,0.12);
     --border-dk:  rgba(242,241,239,0.12);
     --radius:     4px;
-    --font:       'Space Grotesk', sans-serif;
+    --font:       "Roboto", sans-serif;
     --ease:       cubic-bezier(0.16, 1, 0.3, 1);
 }
 

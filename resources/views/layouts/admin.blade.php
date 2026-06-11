@@ -31,7 +31,6 @@
     <link rel="stylesheet" href="{{ asset('assets/css/plugins.min.css')}}" />
     <link rel="stylesheet" href="{{ asset('assets/css/kaiadmin.min.css')}}" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
-
     <link rel="stylesheet" href="{{ asset('assets/css/demo.css')}}" />
     
     <style>
@@ -58,12 +57,22 @@
         box-shadow: 0 5px 15px rgba(0,0,0,0.1);
       }
       .sidebar-logout {
-        margin-top: auto; /* Pushes the item to the bottom */
+        margin-top: auto;
         padding-top: 20px;
         border-top: 1px solid rgba(255, 255, 255, 0.1);
       }
       .sidebar-logout a {
-        color: #dc3545 !important; /* Conventional logout color (red) */
+        color: #dc3545 !important;
+      }
+      /* Section label styling */
+      .nav-section-label {
+        padding: 8px 15px 4px;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.35);
+        pointer-events: none;
       }
     </style>
   </head>
@@ -87,34 +96,67 @@
               <i class="gg-more-vertical-alt"></i>
             </button>
           </div>
-          </div>
+        </div>
+
         <div class="sidebar-wrapper scrollbar scrollbar-inner">
           <div class="sidebar-content">
             <ul class="nav nav-secondary">
+
+              {{-- Dashboard --}}
               <li class="nav-item {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
                 <a href="{{ route('admin.dashboard') }}">
                   <i class="fas fa-home"></i>
                   <p>Dashboard</p>
                 </a>
               </li>
+
+              {{-- Students --}}
               <li class="nav-item {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
                 <a href="{{ route('admin.users.index') }}">
                   <i class="fas fa-users"></i>
                   <p>Students</p>
                 </a>
               </li>
+
+              {{-- Section: Content --}}
+              <li class="nav-section-label">Content</li>
+
+              {{-- Articles --}}
+              <li class="nav-item {{ request()->routeIs('admin.articles.*') ? 'active' : '' }}">
+                <a href="{{ route('admin.articles.index') }}">
+                  <i class="fas fa-newspaper"></i>
+                  <p>Articles</p>
+                </a>
+              </li>
+
+              {{-- Opportunities --}}
+              <li class="nav-item {{ request()->routeIs('admin.opportunities.*') ? 'active' : '' }}">
+                <a href="{{ route('admin.opportunities.index') }}">
+                  <i class="fas fa-briefcase"></i>
+                  <p>Opportunities</p>
+                </a>
+              </li>
+
+              {{-- Section: System --}}
+              <li class="nav-section-label">System</li>
+
+              {{-- Import Data --}}
               <li class="nav-item {{ request()->routeIs('admin.import.*') ? 'active' : '' }}">
                 <a href="{{ route('admin.import.index') }}">
                   <i class="fas fa-file-import"></i>
                   <p>Import Data</p>
                 </a>
               </li>
-               <li class="nav-item {{ request()->routeIs('admin.settings.deadline.index') ? 'active' : '' }}">
+
+              {{-- Settings --}}
+              <li class="nav-item {{ request()->routeIs('admin.settings.*') ? 'active' : '' }}">
                 <a href="{{ route('admin.settings.deadline.index') }}">
-                  <i class="fas fa-file-import"></i>
+                  <i class="fas fa-cog"></i>
                   <p>Settings</p>
                 </a>
               </li>
+
+              {{-- Logout --}}
               <li class="nav-item sidebar-logout">
                 <form action="{{ route('admin.logout') }}" method="POST">
                   @csrf
@@ -124,10 +166,12 @@
                   </a>
                 </form>
               </li>
+
             </ul>
           </div>
         </div>
       </div>
+
       <div class="main-panel">
         <div class="main-header">
           <div class="main-header-logo">
@@ -153,7 +197,8 @@
                 <i class="gg-more-vertical-alt"></i>
               </button>
             </div>
-            </div>
+          </div>
+
           <nav class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom">
             <div class="container-fluid">
               <nav class="navbar navbar-header-left navbar-expand-lg navbar-form nav-search p-0 d-none d-lg-flex">
@@ -187,23 +232,20 @@
                     <div class="dropdown-user-scroll scrollbar-outer">
                       <li>
                         <div class="user-box">
-                          <div class="avatar-lg">
-                          </div>
+                          <div class="avatar-lg"></div>
                           <div class="u-text">
                             <h4>{{ Auth::guard('admin')->user()->name ?? 'Admin User' }}</h4>
                             <p class="text-muted">{{ Auth::guard('admin')->user()->email ?? 'admin@afg.com' }}</p>
                           </div>
                         </div>
                       </li>
-                      <li>
-                        </li>
                     </div>
                   </ul>
                 </li>
               </ul>
             </div>
           </nav>
-          </div>
+        </div>
 
         <div class="container">
           <div class="page-inner">
@@ -226,6 +268,7 @@
             </div>
             
             <div class="page-category">
+
               @if(session('success'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                   <i class="fas fa-check-circle me-2"></i>{{ session('success') }}
@@ -247,7 +290,6 @@
                 </div>
               @endif
 
-              {{-- Fixed: Handle import_errors array properly --}}
               @if(session('import_errors') && is_array(session('import_errors')) && count(session('import_errors')) > 0)
                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
                   <i class="fas fa-exclamation-triangle me-2"></i><strong>Import Errors:</strong>
@@ -260,7 +302,6 @@
                 </div>
               @endif
 
-              {{-- Handle Laravel validation errors (MessageBag) --}}
               @if ($errors->any())
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                   <i class="fas fa-exclamation-circle me-2"></i><strong>Validation Errors:</strong>
@@ -283,69 +324,32 @@
             <nav class="pull-left">
               <ul class="nav">
                 <li class="nav-item">
-                  <a class="nav-link" href="{{ route('admin.dashboard') }}">
-                   
-                  </a>
-                </li>
-                <li class="nav-item">
-                 
-                </li>
-                <li class="nav-item">
-                
+                  <a class="nav-link" href="{{ route('admin.dashboard') }}"></a>
                 </li>
               </ul>
             </nav>
             <div class="copyright">
-              {{ date('Y') }} @
-              <a href="www.academicfunding.org">Academic Funding Gateway</a>
+              {{ date('Y') }} @ <a href="www.academicfunding.org">Academic Funding Gateway</a>
             </div>
           </div>
         </footer>
       </div>
     </div>
+
     <script src="{{asset('assets/js/core/jquery-3.7.1.min.js')}}"></script>
     <script src="{{asset('assets/js/core/popper.min.js')}}"></script>
     <script src="{{asset('assets/js/core/bootstrap.min.js')}}"></script>
-
     <script src="{{asset('assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js')}}"></script>
-
     <script src="{{asset('assets/js/plugin/chart.js/chart.min.js')}}"></script>
-
     <script src="{{asset('assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js')}}"></script>
-
     <script src="{{asset('assets/js/plugin/chart-circle/circles.min.js')}}"></script>
-
     <script src="{{asset('assets/js/plugin/datatables/datatables.min.js')}}"></script>
-
     <script src="{{asset('assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js')}}"></script>
-
     <script src="{{asset('assets/js/plugin/sweetalert/sweetalert.min.js')}}"></script>
-
     <script src="{{asset('assets/js/kaiadmin.min.js')}}"></script>
     
     <script>
-      // Activate current menu item
       document.addEventListener('DOMContentLoaded', function() {
-        const currentRoute = "{{ Route::currentRouteName() }}";
-        const menuItems = document.querySelectorAll('.nav-secondary > li');
-        
-        menuItems.forEach(item => {
-          const link = item.querySelector('a');
-          if (link) {
-            // Remove any existing active classes
-            item.classList.remove('active');
-            
-            // Check if current route matches
-            if (currentRoute.includes('dashboard') && link.href.includes('dashboard')) {
-              item.classList.add('active');
-            } else if (currentRoute.includes('users') && link.href.includes('users')) {
-              item.classList.add('active');
-            } else if (currentRoute.includes('import') && link.href.includes('import')) {
-              item.classList.add('active');
-            }
-          }
-        });
-
         // Auto-hide alerts after 5 seconds
         setTimeout(function() {
           const alerts = document.querySelectorAll('.alert');
@@ -358,9 +362,9 @@
 
       // CSRF token setup for AJAX requests
       $.ajaxSetup({
-          headers: {
-              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          }
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
       });
     </script>
     

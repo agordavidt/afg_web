@@ -8,37 +8,92 @@
 {{-- ── HERO ── --}}
 <section class="hero" aria-label="Hero">
 
-    <div class="hero__left">
-        <div class="hero__card reveal">
-            <p class="hero__card-title">Academic Funding Gateway</p>
-            <p class="hero__card-body">
-                We curate remote work opportunities, scholarships, grants, and practical career
-                guides — so you always know where to look next.
-            </p>
-            <p class="hero__card-em">
-                From first search to first paycheck — we point the way.
-            </p>
-            <a href="{{ route('opportunities.index') }}" class="hero__card-link">
-                View all opportunities <span aria-hidden="true">→</span>
-            </a>
+    {{-- LEFT — IMAGE SLIDER --}}
+    <div class="hero__left" id="heroSlider" aria-label="Opportunity highlights slideshow">
+
+        {{-- Background slides --}}
+        <div class="hero__slides" aria-hidden="true">
+            <div class="hero__slide active"
+                 style="background-image: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2071&auto=format&fit=crop')">
+            </div>
+            <div class="hero__slide"
+                 style="background-image: url('https://images.unsplash.com/photo-1531545514256-b1400bc00f31?q=80&w=1974&auto=format&fit=crop')">
+            </div>
+            <div class="hero__slide"
+                 style="background-image: url('https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=2070&auto=format&fit=crop')">
+            </div>
+            <div class="hero__slide"
+                 style="background-image: url('https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?q=80&w=1974&auto=format&fit=crop')">
+            </div>
         </div>
 
-        <div class="hero__bottom reveal reveal-delay-2">
-            <div class="hero__est">
-                <span>Est.</span>
-                <strong>2024</strong>
+        {{-- Gradient overlay --}}
+        <div class="hero__slide-overlay" aria-hidden="true"></div>
+
+        {{-- Content layer --}}
+        <div class="hero__left-content">
+
+            {{-- Slide label + progress bar --}}
+            <div class="hero__slide-label">
+                {{-- <span class="hero__slide-label-num" id="slideNum">01 / 04</span> --}}
+                {{-- <span class="hero__slide-label-bar">
+                    <span class="hero__slide-label-progress" id="slideProgress"></span>
+                </span>
+                <span class="hero__slide-label-text" id="slideLabelText">Remote Work</span> --}}
             </div>
-            <span class="label">Opportunity Hub</span>
-        </div>
-    </div>
+
+            {{-- The card --}}
+            <div class="hero__card reveal">
+                <p class="hero__card-title">Academic Funding Gateway</p>
+                <p class="hero__card-body">
+                    We curate remote work opportunities, scholarships, grants, and practical career
+                    guides so you always know where to look next.
+                </p>
+                {{-- <p class="hero__card-em">
+                    From first search to first paycheck — we point the way.
+                </p> --}}
+                {{-- <a href="{{ route('opportunities.index') }}" class="hero__card-link">
+                    View all opportunities <span aria-hidden="true">→</span>
+                </a> --}}
+            </div>
+
+            {{-- Bottom: est + dot controls --}}
+            <div class="hero__bottom">
+                <div class="hero__est">
+                    {{-- <span>Est.</span>
+                    <strong>2024</strong> --}}
+                </div>
+
+                <div class="hero__dots" role="tablist" aria-label="Slide selector">
+                    <button class="hero__dot active" data-slide="0" role="tab" aria-selected="true" aria-label="Slide 1: Remote Work">
+                        {{-- <span class="hero__dot-label">Remote Work</span> --}}
+                        <span class="hero__dot-pip"></span>
+                    </button>
+                    <button class="hero__dot" data-slide="1" role="tab" aria-selected="false" aria-label="Slide 2: Scholarships">
+                        {{-- <span class="hero__dot-label">Scholarships</span> --}}
+                        <span class="hero__dot-pip"></span>
+                    </button>
+                    <button class="hero__dot" data-slide="2" role="tab" aria-selected="false" aria-label="Slide 3: Career Guides">
+                        {{-- <span class="hero__dot-label">Career Guides</span> --}}
+                        <span class="hero__dot-pip"></span>
+                    </button>
+                    <button class="hero__dot" data-slide="3" role="tab" aria-selected="false" aria-label="Slide 4: Grants">
+                        {{-- <span class="hero__dot-label">Grants</span> --}}
+                        <span class="hero__dot-pip"></span>
+                    </button>
+                </div>
+            </div>
+
+        </div>{{-- /hero__left-content --}}
+    </div>{{-- /hero__left --}}
 
     <div class="hero__right">
         <div class="hero__watermark" aria-hidden="true">AFG</div>
 
-        <p class="hero__corner text-muted reveal">
+        {{-- <p class="hero__corner text-muted reveal">
             We curate only verified opportunities — from first search<br>
             to actual application link.
-        </p>
+        </p> --}}
 
         <div class="hero__headline reveal reveal-delay-1">
             <h1 class="display-xl">
@@ -89,17 +144,17 @@
 
         <div class="section-header">
             <div class="section-meta">
-                <span class="section-num">01 —</span>
-                <span class="section-tag">Opportunities</span>
+                {{-- <span class="section-num">01 —</span>
+                <span class="section-tag">Opportunities</span> --}}
             </div>
-            <div class="section-aside">Featured this week</div>
+            {{-- <div class="section-aside">Featured this week</div> --}}
         </div>
 
         <div class="flex-between mb-md" style="flex-wrap:wrap; gap:1.6rem;">
             <h2 id="opp-heading" class="display-md reveal">Latest opportunities.</h2>
-            <a href="{{ route('opportunities.index') }}" class="btn--ghost-muted reveal">
+            {{-- <a href="{{ route('opportunities.index') }}" class="btn--ghost-muted reveal">
                 View all 48 <span aria-hidden="true">→</span>
-            </a>
+            </a> --}}
         </div>
 
         {{-- Filter bar --}}
@@ -429,3 +484,87 @@
 </section>
 
 @endsection
+
+@push('scripts')
+<script>
+(function () {
+    const INTERVAL   = 5000;
+    const slides     = document.querySelectorAll('.hero__slide');
+    const dots       = document.querySelectorAll('.hero__dot');
+    const numEl      = document.getElementById('slideNum');
+    const labelEl    = document.getElementById('slideLabelText');
+    const progressEl = document.getElementById('slideProgress');
+
+    if (!slides.length) return;
+
+    const labels = ['Remote Work', 'Scholarships', 'Career Guides', 'Grants'];
+    let current  = 0;
+    let timer    = null;
+
+    function pad(n) { return String(n + 1).padStart(2, '0'); }
+
+    function goTo(idx, restart) {
+        slides[current].classList.remove('active');
+        slides[current].classList.add('exit');
+        const exiting = current;
+        setTimeout(() => slides[exiting].classList.remove('exit'), 1300);
+
+        dots[current].classList.remove('active');
+        dots[current].setAttribute('aria-selected', 'false');
+
+        current = ((idx % slides.length) + slides.length) % slides.length;
+
+        slides[current].classList.add('active');
+        dots[current].classList.add('active');
+        dots[current].setAttribute('aria-selected', 'true');
+
+        if (numEl)   numEl.textContent   = pad(current) + ' / ' + pad(slides.length - 1);
+        if (labelEl) labelEl.textContent = labels[current] || '';
+
+        // Reset + restart progress bar
+        if (progressEl) {
+            progressEl.style.transition = 'none';
+            progressEl.style.width = '0%';
+            void progressEl.offsetWidth;
+            progressEl.style.transition = 'width ' + INTERVAL + 'ms linear';
+            progressEl.style.width = '100%';
+        }
+
+        if (restart !== false) startAuto();
+    }
+
+    function startAuto() {
+        clearInterval(timer);
+        timer = setInterval(() => goTo(current + 1, false), INTERVAL);
+    }
+
+    dots.forEach((dot, i) => {
+        dot.addEventListener('click', () => { if (i !== current) goTo(i); });
+    });
+
+    const slider = document.getElementById('heroSlider');
+
+    slider?.addEventListener('keydown', e => {
+        if (e.key === 'ArrowDown'  || e.key === 'ArrowRight') { e.preventDefault(); goTo(current + 1); }
+        if (e.key === 'ArrowUp'    || e.key === 'ArrowLeft')  { e.preventDefault(); goTo(current - 1); }
+    });
+
+    slider?.addEventListener('mouseenter', () => clearInterval(timer));
+    slider?.addEventListener('mouseleave', () => startAuto());
+
+    let tx = 0;
+    slider?.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
+    slider?.addEventListener('touchend',   e => {
+        const dx = e.changedTouches[0].clientX - tx;
+        if (Math.abs(dx) > 40) goTo(dx < 0 ? current + 1 : current - 1);
+    }, { passive: true });
+
+    // Boot — trigger first progress bar
+    if (progressEl) {
+        progressEl.style.transition = 'width ' + INTERVAL + 'ms linear';
+        progressEl.style.width = '100%';
+    }
+    startAuto();
+})();
+</script>
+@endpush

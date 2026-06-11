@@ -45,12 +45,12 @@
                     Articles
                 </a>
             </li>
-            <li>
+            {{-- <li>
                 <a href="{{ route('donation') }}"
                    class="nav__link {{ request()->routeIs('donation') ? 'active' : '' }}">
                     Partner with us
                 </a>
-            </li>
+            </li> --}}
             <li>
                 <a href="{{ route('opportunities.index') }}" class="nav__cta">
                     Browse Opportunities <span aria-hidden="true">↗</span>
@@ -77,10 +77,10 @@
            class="nav__link {{ request()->routeIs('articles.*') ? 'active' : '' }}">
             Articles
         </a>
-        <a href="{{ route('donation') }}"
+        {{-- <a href="{{ route('donation') }}"
            class="nav__link {{ request()->routeIs('donation') ? 'active' : '' }}">
             Partner with us
-        </a>
+        </a> --}}
         <a href="{{ route('opportunities.index') }}" class="nav__cta">
             Browse Opportunities ↗
         </a>
@@ -105,7 +105,7 @@
                 <ul class="footer__links" role="list">
                     <li><a href="{{ route('opportunities.index') }}" class="footer__link">Opportunities</a></li>
                     <li><a href="{{ route('articles.index') }}" class="footer__link">Articles</a></li>
-                    <li><a href="{{ route('donation') }}" class="footer__link">Partner with us</a></li>
+                    {{-- <li><a href="{{ route('donation') }}" class="footer__link">Partner with us</a></li> --}}
                     <li>
                         <a href="mailto:info@academicfunding.org" class="footer__link">
                             info@academicfunding.org
