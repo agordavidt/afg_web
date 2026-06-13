@@ -1,27 +1,87 @@
-Schema::create('opportunities', function (Blueprint $table) {
-            $table->id();
-            $table->string('title');
-            $table->string('slug')->unique();
-            $table->enum('type', ['remote', 'scholarship', 'grant', 'training']);
-            $table->text('summary');
-            $table->string('source_name');
-            $table->string('source_url');
-            $table->date('deadline')->nullable();
-            $table->boolean('is_active')->default(true);
-            $table->boolean('is_urgent')->default(false);
-            $table->timestamps();
-        });
 
-         Schema::create('articles', function (Blueprint $table) {
-            $table->id();
-            $table->string('title');
-            $table->string('slug')->unique();
-            $table->enum('category', ['remote', 'scholarship', 'platforms', 'career']);
-            $table->text('excerpt');
-            $table->longText('body');           // TipTap HTML
-            $table->string('featured_image_url')->nullable();
-            $table->unsignedTinyInteger('reading_time_minutes')->default(5);
-            $table->boolean('is_published')->default(false);
-            $table->timestamp('published_at')->nullable();
-            $table->timestamps();
-        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+You are an elite, highly experienced Frontend Engineer and Lead Content Strategist. Your task is to refactor a Laravel Blade landing page template. 
+
+You must optimize the page for structural layout clarity, ruthlessly eliminate visual clutter, re-engineer the content tone to sound completely human, and build in organic SEO frameworks.
+
+Here are the strict guidelines for the refactor:
+
+### 1. Structural Changes & Clutter Removal
+- remove all redundant contents (the site does not need to overexplain itself, as to what it does)
+- Remove all static section numbers (e.g., delete "02 —", "03 —", "01", "02" from lists).
+- Remove all visual micro-timers, clock icons, or clock SVGs from the opportunity cards.
+- Remove the text tracking metadata tags from the opportunity card footer (e.g., remove "via { $opp->source_name }").
+- Decide on what sections to stay and their positions eliminating all rendundant elements that are either repetitive or just not needed.
+-- Create the feature for:
+  1. A prominent, high-conversion primary button to "Join the WhatsApp Community".
+  2. A secondary, human-toned link or text block guiding users to email info@academicfunding.org directly if they have inquiries or want to manually subscribe to upcoming opportunity alerts.
+-- ENSURE THAT IT IS RESPONSIVE ON DEVICE SCREENS 
+
+  ### 2. Design System: Typography & Updated Color Tokens
+- Replace the old `:root` styling block with the updated naming structure below. You must swap out the old variable references (like `var(--bg)` or `var(--yellow)`) throughout the entire document and update any hardcoded inline style colors to match this new color scheme:
+
+```css
+:root {
+    --bg-clean-off-white:            #F8F9FA;
+    --ink-deep-navy:                 #0B132B;
+    --ink-slate-muted:               #4A5568;
+    --ink-light-gray-faint:          #A0AEC0;
+    --emerald-accent-action:         #06D6A0;
+    --emerald-accent-dark-hover:    #05B88A;
+    --dark-bg-premium-slate:         #1C2541;
+    --dark-ink-bright-contrast:      #F8F9FA;
+    --border-light-navy-transparent: rgba(11, 19, 43, 0.12);
+    --border-dark-white-transparent: rgba(248, 249, 250, 0.12);
+    --radius:                        6px;
+    --ease:                          cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Typography Assignments */
+h1, h2, h3, h4, h5, h6, .display-xl, .display-md {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+body, p, span, a, li, button, input {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+### 3. Human Copywriting & Tone (No "AI Speak")
+- Rewrite all text, headings, summaries, and descriptions across the entire page to sound like a supportive, relatable, real-life human mentor.
+- Strictly banish all cliché AI filler words, corporate buzzwords, and overly engineered phrases. Do NOT use words like: "Revolutionize", "Elevate", "Empower", "Gateway", "Delve", "Embark", "Furthermore", "In summary", "Crucial", or "Testament".
+- Do not use artificial text-separating dashes (like "02 —" or "— Simple, every time"). Write fluid, clean English headlines.
+- Make the messaging speak directly to a young, ambitious Nigerian audience looking for real, practical global growth.
+
+### 4. Organic SEO Architecture
+- Ensure all category filter buttons have clear semantic structures. 
+- Use structural programmatic layout practices. For the dynamic looping elements, optimize the typography hierarchies (H1 for main hero, H2 for main sections, H3 for card titles) so search engines can crawl it seamlessly.
+- Ensure all images utilize `loading="lazy"` and alt text attributes are structurally robust.
+
+---
+
+### Find attached the source codes.
+

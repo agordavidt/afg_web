@@ -4,25 +4,20 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="@yield('meta_description', 'Academic Funding Gateway — Your hub for remote work opportunities, scholarships, grants, and career guides for Nigerians.')" />
+    <meta name="description" content="@yield('meta_description', 'AFG curates remote jobs, scholarships, grants and training opportunities open to Nigerians — plus straight-talk guides on how to actually apply.')" />
     <link rel="icon" href="{{ asset('assets/img/logo-favicon.png') }}" />
-
-    {{-- Space Grotesk --}}
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
     <link rel="stylesheet" href="{{ asset('css/app.css') }}" />
 
     @stack('head')
 
-    <title>@yield('title', 'Academic Funding Gateway') — Opportunities for Nigerians</title>
+    <title>@yield('title', 'AFG')</title>
 </head>
 <body>
 
     {{-- ── NAV ── --}}
     <nav class="nav" role="navigation" aria-label="Main navigation">
-        <a href="{{ route('home') }}" class="nav__logo" aria-label="Academic Funding Gateway home">
+        <a href="{{ route('home') }}" class="nav__logo" aria-label="AFG home">
             AFG<sup style="font-size:0.6em; font-weight:400">®</sup>
         </a>
 
@@ -42,18 +37,12 @@
             <li>
                 <a href="{{ route('articles.index') }}"
                    class="nav__link {{ request()->routeIs('articles.*') ? 'active' : '' }}">
-                    Articles
+                    Guides
                 </a>
             </li>
-            {{-- <li>
-                <a href="{{ route('donation') }}"
-                   class="nav__link {{ request()->routeIs('donation') ? 'active' : '' }}">
-                    Partner with us
-                </a>
-            </li> --}}
             <li>
                 <a href="{{ route('opportunities.index') }}" class="nav__cta">
-                    Browse Opportunities <span aria-hidden="true">↗</span>
+                    Browse opportunities <span aria-hidden="true">↗</span>
                 </a>
             </li>
         </ul>
@@ -75,14 +64,10 @@
         </a>
         <a href="{{ route('articles.index') }}"
            class="nav__link {{ request()->routeIs('articles.*') ? 'active' : '' }}">
-            Articles
+            Guides
         </a>
-        {{-- <a href="{{ route('donation') }}"
-           class="nav__link {{ request()->routeIs('donation') ? 'active' : '' }}">
-            Partner with us
-        </a> --}}
         <a href="{{ route('opportunities.index') }}" class="nav__cta">
-            Browse Opportunities ↗
+            Browse opportunities ↗
         </a>
     </div>
 
@@ -97,15 +82,14 @@
             <div class="footer__inner">
                 <span class="footer__logo">
                     AFG<sup style="font-size:0.6em; font-weight:400">®</sup>
-                    <span style="font-size:1.2rem; font-weight:400; color:rgba(242,241,239,0.4); margin-left:1.2rem;">
-                        // Academic Funding Gateway
+                    <span style="font-size:1.2rem; font-weight:400; color:rgba(248,249,250,0.4); margin-left:1.2rem;">
+                        // opportunities for Nigerians, every week
                     </span>
                 </span>
 
                 <ul class="footer__links" role="list">
                     <li><a href="{{ route('opportunities.index') }}" class="footer__link">Opportunities</a></li>
-                    <li><a href="{{ route('articles.index') }}" class="footer__link">Articles</a></li>
-                    {{-- <li><a href="{{ route('donation') }}" class="footer__link">Partner with us</a></li> --}}
+                    <li><a href="{{ route('articles.index') }}" class="footer__link">Guides</a></li>
                     <li>
                         <a href="mailto:info@academicfunding.org" class="footer__link">
                             info@academicfunding.org
@@ -114,7 +98,7 @@
                 </ul>
 
                 <p class="footer__copy">
-                    &copy; {{ date('Y') }} Academic Funding Gateway. All rights reserved.
+                    &copy; {{ date('Y') }} AFG. All rights reserved.
                 </p>
             </div>
         </div>

@@ -12,12 +12,11 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\OpportunityController;
 use App\Http\Controllers\Student\RegistrationController;
 use App\Http\Controllers\Student\PaymentController;
+use App\Http\Controllers\HomeController;
 
 // ── FRONTEND ROUTES ──────────────────────────────────────────────────────────
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/opportunities',        [OpportunityController::class, 'index'])->name('opportunities.index');
 Route::get('/opportunities/{slug}', [OpportunityController::class, 'show'])->name('opportunities.show');
