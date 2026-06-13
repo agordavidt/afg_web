@@ -1,110 +1,76 @@
-<script src="https://cdn.jsdelivr.net/npm/@tiptap/core@2.4.0/dist/index.umd.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@tiptap/pm@2.4.0/dist/index.umd.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@tiptap/starter-kit@2.4.0/dist/index.umd.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@tiptap/extension-link@2.4.0/dist/index.umd.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@tiptap/extension-highlight@2.4.0/dist/index.umd.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@tiptap/extension-placeholder@2.4.0/dist/index.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.min.js"></script>
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
 
-    // ── Existing content (edit mode) ──────────────────────────────────────
-    const existing = document.getElementById('bodyInput').value || '';
+    const bodyInput = document.getElementById('bodyInput');
+    const existing  = bodyInput.value || '';
 
-    // ── Init TipTap ──────────────────────────────────────────────────────
-    const editor = new TiptapCore.Editor({
-        element: document.getElementById('editor'),
-        extensions: [
-            TiptapStarterKit.StarterKit,
-            TiptapExtensionLink.Link.configure({
-                openOnClick: false,
-                HTMLAttributes: { rel: 'noopener noreferrer' },
-            }),
-            TiptapExtensionHighlight.Highlight,
-            TiptapExtensionPlaceholder.Placeholder.configure({
-                placeholder: 'Start writing your article here…',
-            }),
-        ],
-        content: existing,
-        onUpdate({ editor }) {
-            document.getElementById('bodyInput').value = editor.getHTML();
+    // ── Remove the old toolbar markup (Quill builds its own) ──────────────
+    const oldToolbar = document.getElementById('editorToolbar');
+    if (oldToolbar) oldToolbar.remove();
+
+    // ── Init Quill ──────────────────────────────────────────────────────
+    const quill = new Quill('#editor', {
+        theme: 'snow',
+        placeholder: 'Start writing your article here…',
+        modules: {
+            toolbar: [
+                [{ header: [2, 3, false] }],
+                ['bold', 'italic'],
+                [{ list: 'ordered' }, { list: 'bullet' }],
+                ['blockquote', 'link'],
+                [{ background: ['#fff3cd', false] }], // highlight
+                ['clean'],
+            ],
         },
     });
 
-    // ── Toolbar ──────────────────────────────────────────────────────────
-    const toolbar = document.getElementById('editorToolbar');
-
-    toolbar.querySelectorAll('button[data-cmd]').forEach(btn => {
-        btn.addEventListener('mousedown', e => {
-            e.preventDefault(); // keep editor focus
-            const cmd = btn.dataset.cmd;
-
-            switch (cmd) {
-                case 'bold':       editor.chain().focus().toggleBold().run();           break;
-                case 'italic':     editor.chain().focus().toggleItalic().run();         break;
-                case 'h2':         editor.chain().focus().toggleHeading({ level: 2 }).run(); break;
-                case 'h3':         editor.chain().focus().toggleHeading({ level: 3 }).run(); break;
-                case 'bullet':     editor.chain().focus().toggleBulletList().run();     break;
-                case 'ordered':    editor.chain().focus().toggleOrderedList().run();    break;
-                case 'blockquote': editor.chain().focus().toggleBlockquote().run();     break;
-                case 'highlight':  editor.chain().focus().toggleHighlight().run();      break;
-                case 'hr':         editor.chain().focus().setHorizontalRule().run();    break;
-                case 'undo':       editor.chain().focus().undo().run();                 break;
-                case 'redo':       editor.chain().focus().redo().run();                 break;
-
-                case 'link': {
-                    const prev = editor.getAttributes('link').href || '';
-                    const url  = window.prompt('Enter URL:', prev);
-                    if (url === null) break;
-                    if (url === '') {
-                        editor.chain().focus().unsetLink().run();
-                    } else {
-                        editor.chain().focus().setLink({ href: url }).run();
-                    }
-                    break;
-                }
-
-                case 'unlink':
-                    editor.chain().focus().unsetLink().run();
-                    break;
-            }
-
-            updateToolbarState();
-        });
-    });
-
-    // ── Toolbar active states ────────────────────────────────────────────
-    function updateToolbarState() {
-        const map = {
-            bold:       () => editor.isActive('bold'),
-            italic:     () => editor.isActive('italic'),
-            h2:         () => editor.isActive('heading', { level: 2 }),
-            h3:         () => editor.isActive('heading', { level: 3 }),
-            bullet:     () => editor.isActive('bulletList'),
-            ordered:    () => editor.isActive('orderedList'),
-            blockquote: () => editor.isActive('blockquote'),
-            highlight:  () => editor.isActive('highlight'),
-            link:       () => editor.isActive('link'),
-        };
-
-        toolbar.querySelectorAll('button[data-cmd]').forEach(btn => {
-            const check = map[btn.dataset.cmd];
-            btn.classList.toggle('is-active', check ? check() : false);
-        });
+    // ── Load existing content (edit mode) ─────────────────────────────────
+    if (existing.trim()) {
+        quill.clipboard.dangerouslyPasteHTML(existing);
     }
 
-    editor.on('selectionUpdate', updateToolbarState);
-    editor.on('transaction',     updateToolbarState);
+    // ── Keep hidden input in sync ──────────────────────────────────────────
+    function sync() {
+        const html = quill.root.innerHTML.trim();
+        bodyInput.value = (html === '<p><br></p>') ? '' : html;
+    }
 
-    // ── Sync hidden input on form submit ─────────────────────────────────
-    document.getElementById('articleForm').addEventListener('submit', () => {
-        document.getElementById('bodyInput').value = editor.getHTML();
+    quill.on('text-change', sync);
+    sync(); // initial sync so edit pages aren't empty on load
+
+    // ── Validate on submit ─────────────────────────────────────────────────
+    const form      = document.getElementById('articleForm');
+    const container = document.querySelector('.ql-container');
+
+    form.addEventListener('submit', function (e) {
+        sync();
+        if (!bodyInput.value) {
+            e.preventDefault();
+            container.classList.add('ql-error');
+            container.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+            let msg = document.getElementById('bodyError');
+            if (!msg) {
+                msg = document.createElement('div');
+                msg.id = 'bodyError';
+                msg.className = 'text-danger mt-1';
+                msg.style.fontSize = '0.875em';
+                msg.textContent = 'The body field is required.';
+                container.insertAdjacentElement('afterend', msg);
+            }
+        } else {
+            container.classList.remove('ql-error');
+            const msg = document.getElementById('bodyError');
+            if (msg) msg.remove();
+        }
     });
 
     // ── Featured image preview ───────────────────────────────────────────
-    const urlInput = document.getElementById('featuredImageUrl');
-    const preview  = document.getElementById('imgPreview');
-    const previewEl= document.getElementById('imgPreviewEl');
+    const urlInput  = document.getElementById('featuredImageUrl');
+    const preview   = document.getElementById('imgPreview');
+    const previewEl = document.getElementById('imgPreviewEl');
 
     function refreshPreview() {
         const val = urlInput.value.trim();
@@ -117,6 +83,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     urlInput.addEventListener('input', refreshPreview);
-    refreshPreview(); // show on edit page if URL already set
+    refreshPreview();
 });
 </script>

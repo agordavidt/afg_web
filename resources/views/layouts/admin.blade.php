@@ -32,6 +32,10 @@
     <link rel="stylesheet" href="{{ asset('assets/css/kaiadmin.min.css')}}" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/css/demo.css')}}" />
+
+    @stack('styles')
+
+    <style>
     
     <style>
       .app-name {

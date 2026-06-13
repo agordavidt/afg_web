@@ -30,31 +30,8 @@
         <div class="mb-3">
             <label class="form-label fw-semibold">Body</label>
 
-            {{-- TipTap toolbar --}}
-            <div class="tiptap-toolbar" id="editorToolbar">
-                <button type="button" data-cmd="bold"        title="Bold">B</button>
-                <button type="button" data-cmd="italic"      title="Italic"><em>I</em></button>
-                <button type="button" data-cmd="h2"          title="Heading 2">H2</button>
-                <button type="button" data-cmd="h3"          title="Heading 3">H3</button>
-                <span class="tiptap-sep"></span>
-                <button type="button" data-cmd="bullet"      title="Bullet list">• List</button>
-                <button type="button" data-cmd="ordered"     title="Numbered list">1. List</button>
-                <span class="tiptap-sep"></span>
-                <button type="button" data-cmd="blockquote"  title="Blockquote">❝</button>
-                <button type="button" data-cmd="highlight"   title="Highlight">Highlight</button>
-                <span class="tiptap-sep"></span>
-                <button type="button" data-cmd="link"        title="Add link">Link</button>
-                <button type="button" data-cmd="unlink"      title="Remove link">Unlink</button>
-                <span class="tiptap-sep"></span>
-                <button type="button" data-cmd="hr"          title="Divider">—</button>
-                <button type="button" data-cmd="undo"        title="Undo">↩</button>
-                <button type="button" data-cmd="redo"        title="Redo">↪</button>
-            </div>
-
-            {{-- Editable area --}}
-            <div id="editor" class="tiptap-editor @error('body') border-danger @enderror">
-                {{-- TipTap mounts here --}}
-            </div>
+            {{-- Editable area — Quill mounts here and builds its own toolbar above --}}
+            <div id="editor" class="@error('body') is-invalid @enderror" style="background:#fff;">{!! old('body', $article->body ?? '') !!}</div>
 
             {{-- Hidden input carries the HTML to the server --}}
             <input type="hidden" name="body" id="bodyInput" value="{{ old('body', $article->body ?? '') }}">
