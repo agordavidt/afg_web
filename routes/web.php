@@ -15,14 +15,16 @@ use App\Http\Controllers\Student\PaymentController;
 use App\Http\Controllers\HomeController;
 
 // ── FRONTEND ROUTES ──────────────────────────────────────────────────────────
+Route::get('/', function() {
+    return view('landing');
+})->name('landing');
+// Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
+// Route::get('/opportunities',        [OpportunityController::class, 'index'])->name('opportunities.index');
+// Route::get('/opportunities/{slug}', [OpportunityController::class, 'show'])->name('opportunities.show');
 
-Route::get('/opportunities',        [OpportunityController::class, 'index'])->name('opportunities.index');
-Route::get('/opportunities/{slug}', [OpportunityController::class, 'show'])->name('opportunities.show');
-
-Route::get('/articles',        [ArticleController::class, 'index'])->name('articles.index');
-Route::get('/articles/{slug}', [ArticleController::class, 'show'])->name('articles.show');
+// Route::get('/articles',        [ArticleController::class, 'index'])->name('articles.index');
+// Route::get('/articles/{slug}', [ArticleController::class, 'show'])->name('articles.show');
 
 Route::get('/donation', function () {
     return view('donation');
